@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>扶輪社活動時間軸 2025-2026</title>
+    <style>
+        body {
+            font-family: 'Microsoft JhengHei', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 300;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .timeline {
+            position: relative;
+            padding: 40px 20px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            transform: translateX(-50%);
+        }
+        .year-section {
+            margin: 40px 0;
+        }
+        .year-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            margin: 30px 0;
+            position: relative;
+        }
+        .year-title::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .year-title span {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: #333;
+        }
+        .timeline-item {
+            display: flex;
+            margin: 25px 0;
+            align-items: center;
+            position: relative;
+        }
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        .timeline-content {
+            flex: 1;
+            padding: 20px;
+            margin: 0 30px;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+        }
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -24px;
+            border-left-color: inherit;
+            transform: translateY(-50%);
+        }
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -24px;
+            border-right-color: inherit;
+            transform: translateY(-50%);
+        }
+        .date {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        .event-title {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.4;
+        }
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* 不同類別的底色 */
+        .category-1 { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); border-left: 5px solid #ff6b9d; }
+        .category-2 { background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); border-left: 5px solid #00d2ff; }
+        .category-3 { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); border-left: 5px solid #ff8a80; }
+        .category-4 { background: linear-gradient(135deg, #a8caba 0%, #5d4e75 100%); border-left: 5px solid #4caf50; }
+        .category-5 { background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%); border-left: 5px solid #9c27b0; }
+        
+        .category-1::before { border-left-color: #ff9a9e; }
+        .category-1::before { border-right-color: #ff9a9e; }
+        .category-2::before { border-left-color: #a8edea; border-right-color: #a8edea; }
+        .category-3::before { border-left-color: #ffecd2; border-right-color: #ffecd2; }
+        .category-4::before { border-left-color: #a8caba; border-right-color: #a8caba; }
+        .category-5::before { border-left-color: #d299c2; border-right-color: #d299c2; }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+            .timeline-item {
+                flex-direction: column !important;
+                align-items: flex-start;
+            }
+            .timeline-content {
+                margin-left: 60px;
+                margin-right: 20px;
+            }
+            .timeline-content::before {
+                left: -24px !important;
+                right: auto !important;
+                border-right-color: inherit !important;
+                border-left-color: transparent !important;
+            }
+            .timeline-marker {
+                left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>國際扶輪3481地區2025-26年度扶青社行事曆</h1>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item category-1">
+                <div style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);"></div>
+                各社典禮
+            </div>
+            <div class="legend-item category-2">
+                <div style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);"></div>
+                扶輪活動
+            </div>
+            <div class="legend-item category-3">
+                <div style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);"></div>
+                社員發展委員會
+            </div>
+            <div class="legend-item category-4">
+                <div style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #a8caba 0%, #5d4e75 100%);"></div>
+                服務計畫委員會
+            </div>
+            <div class="legend-item category-5">
+                <div style="width: 20px; height: 20px; border-radius: 50%; background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);"></div>
+                焦點領域委員會
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="year-section">
+                <div class="year-title"><span>2025年</span></div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">7/5</div>
+                        <div class="event-title">想像就職</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">7/12</div>
+                        <div class="event-title">西區就職(行天宮)、錫口就職(敦南)</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">7/19</div>
+                        <div class="event-title">西門就職、永福就職</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">7/26</div>
+                        <div class="event-title">台北授證</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">8/3</div>
+                        <div class="event-title">晨新就職社慶</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">8/23</div>
+                        <div class="event-title">雁行就職</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-3">
+                        <div class="date">9/6</div>
+                        <div class="event-title">百鬼夜行</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-4">
+                        <div class="date">9/27</div>
+                        <div class="event-title">MDIO APR</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-4">
+                        <div class="date">10/18</div>
+                        <div class="event-title">星兒路跑</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-5">
+                        <div class="date">10/25</div>
+                        <div class="event-title">淨灘</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-5">
+                        <div class="date">11/22</div>
+                        <div class="event-title">獨居老人關懷送餐</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">12/13</div>
+                        <div class="event-title">西區社慶</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+
+            <div class="year-section">
+                <div class="year-title"><span>2026年</span></div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-3">
+                        <div class="date">1/11</div>
+                        <div class="event-title">尾牙</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-2">
+                        <div class="date">3/7-8</div>
+                        <div class="event-title">全國扶青大會</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">3/14</div>
+                        <div class="event-title">錫口社慶</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">3/21</div>
+                        <div class="event-title">西門社慶</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-1">
+                        <div class="date">4/18</div>
+                        <div class="event-title">永福社慶</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-2">
+                        <div class="date">4/19</div>
+                        <div class="event-title">地區年會</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-5">
+                        <div class="date">5/9</div>
+                        <div class="event-title">孩子的秘密基地</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content category-2">
+                        <div class="date">6/13-17</div>
+                        <div class="event-title">國際年會</div>
+                    </div>
+                    <div class="timeline-marker"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
