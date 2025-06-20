@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的電子名片</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #D6E3F0 0%, #f8fafc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(214, 227, 240, 0.3);
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #D6E3F0, #a5b4c7);
+        }
+
+        .logo {
+            width: 120px;
+            height: 60px;
+            background: #f1f5f9;
+            border: 2px dashed #D6E3F0;
+            border-radius: 12px;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            background: #f1f5f9;
+            border: 4px solid #D6E3F0;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 500;
+            overflow: hidden;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .job-title {
+            color: #374151;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chinese-name {
+            color: #1e293b;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .english-name {
+            color: #64748b;
+            font-size: 18px;
+            font-weight: 400;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .description {
+            color: #475569;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            padding: 0 10px;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 24px;
+            background: white;
+            border: 2px solid #D6E3F0;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            gap: 12px;
+        }
+
+        .social-link:hover {
+            background: #D6E3F0;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(214, 227, 240, 0.4);
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            font-size: 20px;
+        }
+
+        /* 社群平台顏色 */
+        .facebook:hover { background: #1877f2; color: white; border-color: #1877f2; }
+        .instagram:hover { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; border-color: #e6683c; }
+        .line:hover { background: #00c300; color: white; border-color: #00c300; }
+        .threads:hover { background: #000; color: white; border-color: #000; }
+
+        @media (max-width: 480px) {
+            .card {
+                margin: 10px;
+                padding: 30px 25px;
+            }
+            
+            .chinese-name {
+                font-size: 24px;
+            }
+            
+            .social-link {
+                padding: 14px 20px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Logo 區域 -->
+        <div class="logo">
+            <img src="Club-Rotaract LogoLockup-Template_EN21.jpg" alt="Company Logo" style="max-width: 250%; max-height: 250%;">
+        </div>
+
+        <!-- 個人照片 -->
+        <div class="profile-photo">
+            <img src="Eve.jpg" alt="個人照片">
+        </div>
+
+        <!-- 職稱 -->
+        <div class="job-title">扶青社當研習會主委</div>
+
+        <!-- 中文姓名 -->
+        <div class="chinese-name">李禹廷</div>
+
+        <!-- 英文暱稱 -->
+        <div class="english-name">IPP. Tim</div>
+
+        <!-- 簡介 (可選) -->
+        <div class="description">
+            台北方舟扶青社
+        </div>
+
+        <!-- 社群連結 -->
+        <div class="social-links">
+            <a href="https://facebook.com/li.yu.ting.705536" class="social-link facebook" target="_blank">
+                <span class="social-icon">📘</span>
+                Facebook
+            </a>
+            
+            <a href="https://instagram.com/lee_yu_ting_tim" class="social-link instagram" target="_blank">
+                <span class="social-icon">📷</span>
+                Instagram
+            </a>
+            
+            <a href="https://line.me/ti/p/book2213" class="social-link line" target="_blank">
+                <span class="social-icon">💬</span>
+                Line
+            </a>
+            
+           <!--<a href="https://threads.net/@lulujiaying" class="social-link threads" target="_blank">
+                <span class="social-icon">🧵</span>
+                Threads
+            </a>-->
+        </div>
+    </div>
+</body>
+</html>
