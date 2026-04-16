@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>癌症治療及預防 | 張哲豪</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #e84b3a;
+    --accent2: #2e86de;
+    --accent3: #10ac84;
+    --accent4: #f5a623;
+    --light: #f8f9fa;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --white: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    background: #1a1a2e;
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  /* ── Slide container ── */
+  .slideshow { width: 100vw; height: 100vh; position: relative; }
+
+  .slide {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px 64px;
+    animation: fadeIn .4s ease;
+  }
+  .slide.active { display: flex; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+  /* ── Navigation ── */
+  .nav {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 16px; z-index: 100;
+    background: rgba(0,0,0,.55); backdrop-filter: blur(8px);
+    padding: 10px 24px; border-radius: 40px;
+  }
+  .nav button {
+    background: none; border: none; color: #fff; font-size: 18px;
+    cursor: pointer; padding: 4px 10px; border-radius: 6px;
+    transition: background .2s;
+  }
+  .nav button:hover { background: rgba(255,255,255,.15); }
+  .nav .progress { color: rgba(255,255,255,.7); font-size: 13px; min-width: 60px; text-align: center; }
+
+  /* ── Slide counter dots ── */
+  .dots {
+    position: fixed; top: 20px; right: 28px; z-index: 100;
+    display: flex; gap: 6px; flex-wrap: wrap; max-width: 200px; justify-content: flex-end;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,.3); cursor: pointer; transition: background .2s;
+  }
+  .dot.active { background: var(--accent4); }
+
+  /* ══════════════════════════════
+     SLIDE THEMES
+  ══════════════════════════════ */
+
+  /* Cover */
+  .slide-cover {
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    text-align: center;
+  }
+  .slide-cover .icon-circle {
+    width: 110px; height: 110px; border-radius: 50%;
+    background: rgba(232,75,58,.2); border: 3px solid rgba(232,75,58,.5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px; color: var(--accent); margin: 0 auto 28px;
+  }
+  .slide-cover h1 {
+    font-size: 52px; font-weight: 800; color: #fff;
+    letter-spacing: 4px; margin-bottom: 12px;
+  }
+  .slide-cover .subtitle {
+    font-size: 18px; color: rgba(255,255,255,.65);
+    letter-spacing: 2px; margin-bottom: 32px;
+  }
+  .slide-cover .tags {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .tag {
+    padding: 6px 16px; border-radius: 20px;
+    background: rgba(255,255,255,.1); color: rgba(255,255,255,.8);
+    font-size: 14px; border: 1px solid rgba(255,255,255,.2);
+  }
+
+  /* White slides */
+  .slide-white { background: var(--white); }
+  .slide-light { background: #f0f4f8; }
+
+  /* Section header */
+  .slide-section {
+    background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+    text-align: center;
+  }
+  .slide-section h2 { font-size: 48px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .slide-section .q-mark { font-size: 80px; color: rgba(255,255,255,.1); position: absolute; top: 20px; right: 40px; }
+
+  /* ── Common layout helpers ── */
+  .slide-title {
+    font-size: 28px; font-weight: 700; color: var(--primary);
+    margin-bottom: 36px; padding-bottom: 12px;
+    border-left: 5px solid var(--accent);
+    padding-left: 16px; align-self: flex-start;
+  }
+  .slide-title.center { align-self: center; border-left: none; text-align: center; }
+
+  .cols { display: flex; gap: 32px; width: 100%; align-items: stretch; }
+  .col { flex: 1; }
+
+  /* Cards */
+  .card {
+    background: #fff; border-radius: 16px;
+    padding: 24px 20px; text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    transition: transform .2s;
+  }
+  .card:hover { transform: translateY(-4px); }
+  .card .card-icon { font-size: 36px; margin-bottom: 12px; }
+  .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--primary); }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* Bio card */
+  .bio-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+  .bio-item {
+    background: #fff; border-radius: 12px; padding: 20px;
+    display: flex; align-items: flex-start; gap: 14px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  }
+  .bio-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .bio-icon.blue { background: #dbeafe; color: var(--accent2); }
+  .bio-icon.green { background: #d1fae5; color: var(--accent3); }
+  .bio-icon.orange { background: #fef3c7; color: var(--accent4); }
+  .bio-icon.red { background: #fee2e2; color: var(--accent); }
+  .bio-text h4 { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .bio-text p { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.5; }
+
+  /* Treatment circles */
+  .treat-wrap { display: flex; justify-content: center; gap: 48px; width: 100%; flex-wrap: wrap; }
+  .treat-node { text-align: center; }
+  .treat-circle {
+    width: 130px; height: 130px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 800; color: #fff;
+    margin: 0 auto 16px; position: relative;
+    box-shadow: 0 8px 24px rgba(0,0,0,.15);
+  }
+  .treat-sub {
+    background: #fff; border-radius: 12px; padding: 12px 14px;
+    font-size: 13px; color: var(--text); line-height: 1.8;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08); min-width: 140px;
+    border-top: 3px solid transparent;
+  }
+
+  /* Arrow connector */
+  .arrow-tag {
+    font-size: 12px; background: rgba(0,0,0,.07); padding: 2px 8px;
+    border-radius: 4px; display: inline-block; margin: 2px 0;
+  }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 600; margin: 1px;
+  }
+  .badge-new { background: #dcfce7; color: #16a34a; }
+  .badge-hot { background: #fee2e2; color: #dc2626; }
+
+  /* Stage bar */
+  .stage-row { display: flex; gap: 0; width: 100%; }
+  .stage-box {
+    flex: 1; padding: 18px 12px; text-align: center;
+    color: #fff; font-weight: 700; font-size: 16px;
+    position: relative;
+  }
+  .stage-box::after {
+    content: ''; position: absolute; right: -1px; top: 50%;
+    transform: translateY(-50%);
+    border: 14px solid transparent;
+    z-index: 2;
+  }
+  .s1 { background: #10ac84; border-radius: 10px 0 0 10px; }
+  .s2 { background: #2e86de; }
+  .s3 { background: #f5a623; }
+  .s4 { background: #e84b3a; border-radius: 0 10px 10px 0; }
+
+  .treat-pills { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .pill {
+    padding: 10px 20px; border-radius: 24px;
+    font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* Cost table */
+  .cost-table { width: 100%; border-collapse: separate; border-spacing: 0 6px; }
+  .cost-table th {
+    background: var(--primary); color: #fff;
+    padding: 10px 16px; font-size: 14px; font-weight: 600;
+    text-align: center;
+  }
+  .cost-table th:first-child { border-radius: 8px 0 0 8px; }
+  .cost-table th:last-child { border-radius: 0 8px 8px 0; }
+  .cost-table td {
+    background: #fff; padding: 11px 16px; font-size: 14px;
+    text-align: center; border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .cost-table td:first-child { border-left: 1px solid #f0f0f0; border-radius: 8px 0 0 8px; }
+  .cost-table td:last-child { border-right: 1px solid #f0f0f0; border-radius: 0 8px 8px 0; }
+  .cost-table tr:hover td { background: #f8faff; }
+  .nhia { background: #dcfce7 !important; color: #15803d; font-weight: 700; }
+  .cost-hi { background: #fee2e2 !important; color: #dc2626; font-weight: 700; }
+  .cost-med { background: #fef3c7 !important; color: #d97706; font-weight: 600; }
+
+  /* Timeline */
+  .timeline { display: flex; flex-direction: column; gap: 20px; width: 100%; }
+  .tl-item { display: flex; gap: 20px; align-items: flex-start; }
+  .tl-dot {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; color: #fff; flex-shrink: 0;
+  }
+  .tl-content h4 { font-size: 16px; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+  .tl-content p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+  /* Myth buster */
+  .myth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+  .myth-card {
+    border-radius: 14px; padding: 22px; position: relative; overflow: hidden;
+  }
+  .myth-card.myth { background: #fff0f0; border: 1.5px solid #fca5a5; }
+  .myth-card.fact { background: #f0fdf4; border: 1.5px solid #86efac; }
+  .myth-label {
+    font-size: 11px; font-weight: 800; letter-spacing: 1px;
+    padding: 3px 10px; border-radius: 10px; display: inline-block; margin-bottom: 10px;
+  }
+  .myth-label.red { background: #dc2626; color: #fff; }
+  .myth-label.green { background: #16a34a; color: #fff; }
+  .myth-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  .myth-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* Quote */
+  .big-quote {
+    font-size: 32px; font-weight: 800; color: var(--primary);
+    text-align: center; line-height: 1.5; max-width: 700px;
+  }
+  .big-quote em { color: var(--accent); font-style: normal; }
+
+  /* Progress bar */
+  .prog-bar { height: 3px; background: rgba(255,255,255,.2); }
+  .prog-fill { height: 100%; background: var(--accent4); transition: width .3s; }
+
+  /* Icon stat */
+  .stat-row { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; width: 100%; }
+  .stat-box {
+    background: #fff; border-radius: 16px; padding: 24px 20px;
+    text-align: center; flex: 1; min-width: 140px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.07);
+  }
+  .stat-box .num { font-size: 36px; font-weight: 900; margin-bottom: 4px; }
+  .stat-box .label { font-size: 13px; color: var(--muted); }
+
+  /* Preparation checklist */
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 14px; width: 100%; }
+  .check-list li {
+    display: flex; align-items: center; gap: 16px;
+    background: #fff; border-radius: 12px; padding: 16px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    font-size: 16px; font-weight: 500;
+  }
+  .check-list li .icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+
+  /* Caution banner */
+  .caution {
+    background: linear-gradient(135deg, #fff7ed, #fef3c7);
+    border: 1.5px solid #fcd34d;
+    border-radius: 14px; padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+    width: 100%; margin-top: 16px;
+    font-size: 14px; color: #92400e;
+  }
+  .caution i { font-size: 28px; color: var(--accent4); flex-shrink: 0; }
+
+  /* Section divider icon */
+  .section-icon {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; color: #fff; margin: 0 auto 20px;
+  }
+
+  /* History banner */
+  .hist-banner {
+    background: linear-gradient(135deg, #0f2027, #203a43);
+    border-radius: 20px; padding: 36px; width: 100%;
+    display: flex; align-items: center; gap: 36px; color: #fff;
+  }
+  .hist-banner .hist-icon { font-size: 64px; flex-shrink: 0; }
+  .hist-banner h3 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+  .hist-banner p { font-size: 15px; color: rgba(255,255,255,.75); line-height: 1.7; }
+
+  /* DNA deco */
+  .deco { position: absolute; opacity: .04; font-size: 200px; color: #000; z-index: 0; pointer-events: none; }
+  .content-layer { position: relative; z-index: 1; width: 100%; }
+
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    .slide { padding: 32px 24px; }
+    .cols { flex-direction: column; }
+    .bio-grid { grid-template-columns: 1fr; }
+    .myth-grid { grid-template-columns: 1fr; }
+    .slide-cover h1 { font-size: 36px; }
+    .treat-wrap { gap: 24px; }
+    .treat-circle { width: 100px; height: 100px; font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="slideshow">
+
+  <!-- ① Cover -->
+  <div class="slide slide-cover active" id="s1">
+    <div class="icon-circle"><i class="fas fa-ribbon"></i></div>
+    <h1>癌症治療及預防</h1>
+    <p class="subtitle">Cancer Treatment & Prevention</p>
+    <div class="tags">
+      <span class="tag"><i class="fas fa-calendar-alt"></i> 2026.04.16</span>
+      <span class="tag"><i class="fas fa-users"></i> 雲林縣企業二代菁英聯誼會</span>
+      <span class="tag"><i class="fas fa-user-md"></i> 張哲豪 醫師</span>
+    </div>
+    <div class="prog-bar" style="position:absolute;bottom:0;left:0;right:0;">
+      <div class="prog-fill" id="progFill" style="width:5.88%"></div>
+    </div>
+  </div>
+
+  <!-- ② Speaker Bio -->
+  <div class="slide slide-light" id="s2">
+    <div class="deco"><i class="fas fa-dna"></i></div>
+    <div class="content-layer" style="width:100%">
+      <div class="slide-title">關於講者</div>
+      <div class="bio-grid">
+        <div class="bio-item">
+          <div class="bio-icon blue"><i class="fas fa-hospital"></i></div>
+          <div class="bio-text">
+            <h4>現任職務</h4>
+            <p>臺大醫院雲林分院<br><strong>腫瘤部 主治醫師</strong><br>臺大醫院 腫瘤部 兼任主治醫師</p>
+          </div>
+        </div>
+        <div class="bio-item">
+          <div class="bio-icon green"><i class="fas fa-graduation-cap"></i></div>
+          <div class="bio-text">
+            <h4>學歷</h4>
+            <p><strong>國立臺灣大學</strong><br>醫學系畢業</p>
+          </div>
+        </div>
+        <div class="bio-item">
+          <div class="bio-icon orange"><i class="fas fa-handshake"></i></div>
+          <div class="bio-text">
+            <h4>社會參與</h4>
+            <p>雲林縣企業二代菁英聯誼會 會員</p>
+          </div>
+        </div>
+        <div class="bio-item">
+          <div class="bio-icon red"><i class="fas fa-award"></i></div>
+          <div class="bio-text">
+            <h4>社團職務</h4>
+            <p>3481地區扶青代表<br>台北錫口扶青社2023-24年度社長</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ Why cancer? – section header -->
+  <div class="slide slide-section" id="s3">
+    <span class="q-mark">?</span>
+    <div class="section-icon"><i class="fas fa-microscope"></i></div>
+    <h2>為什麼會得癌症？</h2>
+    <p style="color:rgba(255,255,255,.7);font-size:18px;margin-top:8px;">探索癌症成因</p>
+  </div>
+
+  <!-- ④ Cancer etymology (crab) -->
+  <div class="slide slide-white" id="s4">
+    <div class="slide-title center">「癌」的由來</div>
+    <div class="cols" style="align-items:center">
+      <div style="text-align:center;flex:1">
+        <div style="font-size:100px;margin-bottom:16px;">🦀</div>
+        <h3 style="font-size:24px;color:var(--primary);margin-bottom:8px;">Cancer = 螃蟹</h3>
+        <p style="color:var(--muted);line-height:1.8;max-width:260px;margin:0 auto">
+          源自希臘文 <strong>Karkinos</strong>（螃蟹），古代醫師希波克拉底觀察腫瘤向外延伸的血管，狀似螃蟹腳。
+        </p>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px">
+        <div class="card" style="text-align:left;display:flex;align-items:center;gap:16px">
+          <span style="font-size:28px">🔬</span>
+          <div>
+            <h4 style="color:var(--primary);margin-bottom:4px">細胞基因突變</h4>
+            <p style="font-size:13px;color:var(--muted)">正常細胞因基因損傷失控增生</p>
+          </div>
+        </div>
+        <div class="card" style="text-align:left;display:flex;align-items:center;gap:16px">
+          <span style="font-size:28px">🌿</span>
+          <div>
+            <h4 style="color:var(--primary);margin-bottom:4px">環境與生活因素</h4>
+            <p style="font-size:13px;color:var(--muted)">菸酒、輻射、病毒感染、致癌物</p>
+          </div>
+        </div>
+        <div class="card" style="text-align:left;display:flex;align-items:center;gap:16px">
+          <span style="font-size:28px">🧬</span>
+          <div>
+            <h4 style="color:var(--primary);margin-bottom:4px">遺傳與老化</h4>
+            <p style="font-size:13px;color:var(--muted)">基因遺傳傾向、細胞修復能力下降</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ Folk wisdom -->
+  <div class="slide slide-section" id="s5" style="background:linear-gradient(135deg,#2c3e50 0%,#4a5568 100%)">
+    <div style="font-size:56px;font-weight:900;color:#fff;letter-spacing:6px;line-height:1.9;text-align:center">
+      一命<br>二運<br>三風水<br>四積陰德<br>五讀書
+    </div>
+  </div>
+
+  <!-- ⑦ Treatment overview – section -->
+  <div class="slide slide-section" id="s6">
+    <div class="section-icon"><i class="fas fa-syringe"></i></div>
+    <h2>治療會不會很可怕？</h2>
+    <p style="color:rgba(255,255,255,.7);font-size:18px;margin-top:8px;">認識現代癌症三大治療支柱</p>
+  </div>
+
+  <!-- ⑧ Three treatment pillars -->
+  <div class="slide slide-light" id="s7">
+    <div class="slide-title center">現代癌症治療三大支柱</div>
+    <div class="treat-wrap">
+
+      <div class="treat-node">
+        <div class="treat-circle" style="background:linear-gradient(135deg,#10ac84,#1dd1a1)">
+          <i class="fas fa-scalpel"></i>&nbsp;手術
+        </div>
+        <div class="treat-sub" style="border-color:#10ac84">
+          <div>內視鏡手術</div>
+          <div style="font-weight:700;color:#10ac84">達文西手術</div>
+          <span class="badge badge-new">精準微創</span>
+        </div>
+      </div>
+
+      <div class="treat-node">
+        <div class="treat-circle" style="background:linear-gradient(135deg,#f5a623,#ffd32a)">
+          <i class="fas fa-radiation"></i>&nbsp;放射
+        </div>
+        <div class="treat-sub" style="border-color:#f5a623">
+          <div>光子治療 (健保)</div>
+          <div>質子 / 重粒子</div>
+          <div style="font-weight:700;color:#f5a623">核放射藥物</div>
+          <span class="badge badge-new">精準打擊</span>
+        </div>
+      </div>
+
+      <div class="treat-node">
+        <div class="treat-circle" style="background:linear-gradient(135deg,#e84b3a,#ff6b6b)">
+          <i class="fas fa-pills"></i>&nbsp;藥物
+        </div>
+        <div class="treat-sub" style="border-color:#e84b3a">
+          <div>化學治療</div>
+          <div>標靶治療
+            <div style="font-size:11px;color:var(--muted)">→ 標靶化療複合體 (ADC)</div>
+          </div>
+          <div>免疫治療
+            <div style="font-size:11px;color:var(--muted)">→ 細胞治療 / BiTE / 癌症疫苗</div>
+          </div>
+          <span class="badge badge-hot">最新發展</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ⑨ History: Surgery (barber-surgeon) -->
+  <div class="slide slide-white" id="s8">
+    <div class="slide-title">手術的歷史</div>
+    <div class="hist-banner">
+      <div class="hist-icon">✂️</div>
+      <div>
+        <h3>理髮師兼外科醫師</h3>
+        <p>中世紀歐洲，外科手術由「理髮外科師」(Barber-Surgeon) 操刀，使用剃刀進行截肢與縫合。紅白藍旋轉燈柱即源自此歷史——紅代表動脈、白代表繃帶、藍代表靜脈。</p>
+        <p style="margin-top:12px">現代外科已進化至 <strong>機器人輔助 (達文西)</strong> 與 <strong>內視鏡微創</strong>，傷口更小、恢復更快。</p>
+      </div>
+    </div>
+    <div class="timeline" style="margin-top:20px;flex-direction:row;gap:20px">
+      <div class="tl-item" style="flex:1;flex-direction:column;align-items:center;text-align:center">
+        <div class="tl-dot" style="background:#6c757d">✂️</div>
+        <div class="tl-content"><h4>中世紀</h4><p>理髮外科師</p></div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--muted)">→</div>
+      <div class="tl-item" style="flex:1;flex-direction:column;align-items:center;text-align:center">
+        <div class="tl-dot" style="background:#2e86de"><i class="fas fa-hospital"></i></div>
+        <div class="tl-content"><h4>20世紀</h4><p>現代開腹手術<br>麻醉與無菌術</p></div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--muted)">→</div>
+      <div class="tl-item" style="flex:1;flex-direction:column;align-items:center;text-align:center">
+        <div class="tl-dot" style="background:#10ac84"><i class="fas fa-robot"></i></div>
+        <div class="tl-content"><h4>現代</h4><p>達文西機械臂<br>內視鏡微創</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑩ History: Radiation (Marie Curie) -->
+  <div class="slide slide-white" id="s9">
+    <div class="slide-title">放射線治療的誕生</div>
+    <div class="hist-banner">
+      <div class="hist-icon">☢️</div>
+      <div>
+        <h3>居里夫人 Marie Curie</h3>
+        <p>1898年發現鐳 (Radium) 與釙 (Polonium)，開啟放射性元素用於醫療之路。她是首位獲得兩次諾貝爾獎的科學家（物理與化學各一），更是推動放射線治療的先驅。</p>
+        <p style="margin-top:12px">現代放射治療已可精準鎖定腫瘤，<strong>質子治療</strong>、<strong>重粒子治療</strong>、<strong>核放射藥物</strong>大幅減少對周圍正常組織的傷害。</p>
+      </div>
+    </div>
+    <div class="stat-row" style="margin-top:20px">
+      <div class="stat-box"><div class="num" style="color:#6c757d">1898</div><div class="label">發現鐳元素</div></div>
+      <div class="stat-box"><div class="num" style="color:#6c757d">2×</div><div class="label">諾貝爾獎得主</div></div>
+      <div class="stat-box"><div class="num" style="color:var(--accent2)">質子</div><div class="label">精準放射治療</div></div>
+      <div class="stat-box"><div class="num" style="color:var(--accent)">核藥</div><div class="label">放射性核種治療</div></div>
+    </div>
+  </div>
+
+  <!-- ⑪ History: Chemo (WWII) -->
+  <div class="slide slide-white" id="s10">
+    <div class="slide-title">化學治療的起源</div>
+    <div class="hist-banner" style="background:linear-gradient(135deg,#2c3e50,#4a5568)">
+      <div class="hist-icon">🪖</div>
+      <div>
+        <h3>二戰芥子氣 → 化學治療</h3>
+        <p>1943年，美軍研究芥子氣 (Mustard Gas) 對人體的毒性時，發現其能強力抑制白血球增生，意外開創了癌症「化學治療」的先河。</p>
+        <p style="margin-top:12px">氮芥子氣衍生物成為最早的化療藥物，用於淋巴瘤治療，奠定現代腫瘤藥物學基礎。</p>
+      </div>
+    </div>
+    <div class="timeline" style="margin-top:20px;flex-direction:row;gap:20px">
+      <div class="tl-item" style="flex:1;flex-direction:column;align-items:center;text-align:center">
+        <div class="tl-dot" style="background:#4a5568">🪖</div>
+        <div class="tl-content"><h4>1943 WWII</h4><p>芥子氣毒性研究</p></div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--muted)">→</div>
+      <div class="tl-item" style="flex:1;flex-direction:column;align-items:center;text-align:center">
+        <div class="tl-dot" style="background:#f5a623"><i class="fas fa-flask"></i></div>
+        <div class="tl-content"><h4>1950s</h4><p>化療藥物問世<br>淋巴瘤治療突破</p></div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--muted)">→</div>
+      <div class="tl-item" style="flex:1;flex-direction:column;align-items:center;text-align:center">
+        <div class="tl-dot" style="background:#e84b3a"><i class="fas fa-capsules"></i></div>
+        <div class="tl-content"><h4>現代</h4><p>標靶 / 免疫<br>精準藥物治療</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑫ Targeted therapy -->
+  <div class="slide slide-light" id="s11">
+    <div class="slide-title">標靶治療</div>
+    <div class="cols">
+      <div class="col">
+        <div class="card" style="margin-bottom:16px;text-align:left">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <span style="font-size:32px">🎯</span>
+            <h3 style="margin:0">什麼是標靶治療？</h3>
+          </div>
+          <p>針對腫瘤細胞上特定的「驅動基因突變」或蛋白質受體，阻斷癌細胞的生長訊號，對正常細胞傷害較小。</p>
+        </div>
+        <div class="card" style="text-align:left">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+            <span style="font-size:32px">🧬</span>
+            <h3 style="margin:0">需要先做基因檢測</h3>
+          </div>
+          <p>使用前需確認腫瘤是否具有對應基因突變（如 EGFR、HER2、ALK、KRAS…），才能有效發揮作用。</p>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(0,0,0,.07);height:100%">
+          <h3 style="color:var(--primary);margin-bottom:16px;font-size:17px"><i class="fas fa-arrow-right" style="color:var(--accent)"></i> 最新進展：ADC（抗體藥物複合體）</h3>
+          <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:16px">將標靶抗體與化療藥物「綁」在一起，由抗體精準導航至癌細胞後釋放化療，兼具精準與強效。</p>
+          <div style="background:linear-gradient(135deg,#e84b3a15,#e84b3a08);border:1.5px solid #e84b3a30;border-radius:10px;padding:16px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px">ADC = 抗體 + 化療藥物</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px">
+              <span>🎯 抗體鎖定癌細胞</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;margin-top:4px">
+              <span>💊 化療精準投放</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;margin-top:4px">
+              <span>✅ 副作用相對降低</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑬ Immunotherapy -->
+  <div class="slide slide-light" id="s12">
+    <div class="slide-title">免疫治療</div>
+    <div class="cols">
+      <div class="col">
+        <div class="card" style="margin-bottom:16px;text-align:left">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+            <span style="font-size:32px">🛡️</span>
+            <h3 style="margin:0">免疫治療原理</h3>
+          </div>
+          <p style="font-size:14px">癌細胞會躲避免疫系統監視（如 PD-L1 偽裝）。免疫治療透過解除癌細胞的「偽裝」，讓自身免疫系統重新辨識並攻擊癌細胞。</p>
+        </div>
+      </div>
+      <div class="col">
+        <div style="background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(0,0,0,.07)">
+          <h3 style="color:var(--primary);margin-bottom:16px;font-size:17px">三大前沿方向</h3>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:#f8faff;border-radius:10px">
+              <span style="font-size:22px">🧫</span>
+              <div>
+                <div style="font-weight:700;margin-bottom:2px">細胞治療（CAR-T）</div>
+                <div style="font-size:13px;color:var(--muted)">抽取患者T細胞，體外改造後回輸，精準殺滅癌細胞</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:#f8faff;border-radius:10px">
+              <span style="font-size:22px">⚔️</span>
+              <div>
+                <div style="font-weight:700;margin-bottom:2px">雙特異性T細胞接合劑（BiTE）</div>
+                <div style="font-size:13px;color:var(--muted)">一端抓住T細胞、一端抓住癌細胞，使其面對面接觸消滅</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:flex-start;gap:12px;padding:12px;background:#f8faff;border-radius:10px">
+              <span style="font-size:22px">💉</span>
+              <div>
+                <div style="font-weight:700;margin-bottom:2px">抗癌疫苗</div>
+                <div style="font-size:13px;color:var(--muted)">個人化腫瘤新抗原疫苗，訓練免疫系統辨識特定癌細胞</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑭ Treatment summary (repeat) -->
+  <div class="slide slide-white" id="s13">
+    <div class="slide-title center">治療選擇總覽</div>
+    <div class="treat-wrap">
+      <div class="treat-node">
+        <div class="treat-circle" style="background:linear-gradient(135deg,#10ac84,#1dd1a1)">
+          <i class="fas fa-scalpel"></i>&nbsp;手術
+        </div>
+        <div class="treat-sub" style="border-color:#10ac84">
+          <div>內視鏡手術</div>
+          <div style="font-weight:700;color:#10ac84">達文西手術</div>
+        </div>
+      </div>
+      <div class="treat-node">
+        <div class="treat-circle" style="background:linear-gradient(135deg,#f5a623,#ffd32a)">
+          <i class="fas fa-radiation"></i>&nbsp;放射
+        </div>
+        <div class="treat-sub" style="border-color:#f5a623">
+          <div>光子 / 質子 / 重粒子</div>
+          <div style="font-weight:700;color:#f5a623">核放射藥物</div>
+        </div>
+      </div>
+      <div class="treat-node">
+        <div class="treat-circle" style="background:linear-gradient(135deg,#e84b3a,#ff6b6b)">
+          <i class="fas fa-pills"></i>&nbsp;藥物
+        </div>
+        <div class="treat-sub" style="border-color:#e84b3a">
+          <div>化學 / 標靶 / 免疫</div>
+          <div style="font-weight:700;color:#e84b3a">ADC / CAR-T / BiTE</div>
+          <span class="badge badge-hot">持續創新中</span>
+        </div>
+      </div>
+    </div>
+    <div class="caution" style="margin-top:24px">
+      <i class="fas fa-info-circle"></i>
+      <span>各種治療方式常<strong>合併使用</strong>，由腫瘤科醫師依據癌別、期別、基因報告，制定個人化治療計畫。</span>
+    </div>
+  </div>
+
+  <!-- ⑮ What do I need to prepare? – section -->
+  <div class="slide slide-section" id="s14">
+    <div class="section-icon"><i class="fas fa-clipboard-list"></i></div>
+    <h2>我需要準備什麼？</h2>
+    <p style="color:rgba(255,255,255,.7);font-size:18px;margin-top:8px;">確診後的因應準備</p>
+  </div>
+
+  <!-- ⑯ Stages & Treatment -->
+  <div class="slide slide-light" id="s15">
+    <div class="slide-title">依分期決定治療策略</div>
+    <div class="stage-row" style="margin-bottom:24px">
+      <div class="stage-box s1">第一期<br><small style="font-weight:400;font-size:13px">局部腫瘤</small></div>
+      <div class="stage-box s2">第二期<br><small style="font-weight:400;font-size:13px">局部侵犯</small></div>
+      <div class="stage-box s3">第三期<br><small style="font-weight:400;font-size:13px">區域淋巴轉移</small></div>
+      <div class="stage-box s4">第四期<br><small style="font-weight:400;font-size:13px">遠處轉移</small></div>
+    </div>
+    <div class="treat-pills">
+      <div class="pill" style="background:#dcfce7;color:#15803d">
+        <i class="fas fa-scalpel"></i> 手術治療（第一∼三期為主）
+      </div>
+      <div class="pill" style="background:#fef3c7;color:#d97706">
+        <i class="fas fa-radiation"></i> 放射治療（輔助或根治性）
+      </div>
+      <div class="pill" style="background:#fee2e2;color:#dc2626">
+        <i class="fas fa-pills"></i> 藥物治療（各期皆可配合）
+      </div>
+      <div class="pill" style="background:#f3f4f6;color:#6b7280">
+        <i class="fas fa-heart"></i> 安寧治療（第四期 / 症狀控制）
+      </div>
+    </div>
+    <div class="caution" style="margin-top:16px">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span>期別越早，治癒率越高。<strong>定期篩檢</strong>是提早發現、提早治療的最佳方式。</span>
+    </div>
+  </div>
+
+  <!-- ⑰ Financial burden -->
+  <div class="slide slide-section" style="background:linear-gradient(135deg,#2c3e50,#4a5568)" id="s16">
+    <div class="section-icon"><i class="fas fa-heartbeat"></i></div>
+    <div class="big-quote" style="color:#fff">
+      最難過的不是<br>罹癌<em style="color:var(--accent4)">無法治療</em>…<br>
+      <span style="font-size:22px;color:rgba(255,255,255,.7);font-weight:400;display:block;margin-top:16px">而是有辦法治療，卻負擔不起費用</span>
+    </div>
+  </div>
+
+  <!-- ⑱ Cost table -->
+  <div class="slide slide-light" id="s17">
+    <div class="slide-title center">癌症治療費用概算</div>
+    <table class="cost-table">
+      <thead>
+        <tr>
+          <th>治療類別</th>
+          <th>項目</th>
+          <th>費用概算</th>
+          <th>備註</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="3" style="font-weight:700;color:var(--primary)"><i class="fas fa-scalpel"></i><br>手術</td>
+          <td>傳統手術</td>
+          <td class="nhia">健保給付</td>
+          <td style="font-size:13px;color:var(--muted)">視病況自付差額</td>
+        </tr>
+        <tr>
+          <td>內視鏡手術</td>
+          <td class="cost-med">約 5 萬元</td>
+          <td style="font-size:13px;color:var(--muted)">部分健保補助</td>
+        </tr>
+        <tr>
+          <td>達文西手術</td>
+          <td class="cost-med">約 20 萬元</td>
+          <td style="font-size:13px;color:var(--muted)">自費</td>
+        </tr>
+        <tr>
+          <td rowspan="2" style="font-weight:700;color:var(--primary)"><i class="fas fa-radiation"></i><br>放射</td>
+          <td>光子治療</td>
+          <td class="nhia">健保給付</td>
+          <td style="font-size:13px;color:var(--muted)">-</td>
+        </tr>
+        <tr>
+          <td>重粒子治療</td>
+          <td class="cost-hi">約 100 萬元</td>
+          <td style="font-size:13px;color:var(--muted)">自費</td>
+        </tr>
+        <tr>
+          <td rowspan="4" style="font-weight:700;color:var(--primary)"><i class="fas fa-pills"></i><br>藥物</td>
+          <td>化學治療</td>
+          <td class="nhia">數千元 / 月</td>
+          <td style="font-size:13px;color:var(--muted)">健保給付為主</td>
+        </tr>
+        <tr>
+          <td>標靶治療</td>
+          <td class="cost-med">數萬元 / 月</td>
+          <td style="font-size:13px;color:var(--muted)">部分健保；自費差異大</td>
+        </tr>
+        <tr>
+          <td>免疫治療</td>
+          <td class="cost-hi">約 20 萬 / 月</td>
+          <td style="font-size:13px;color:var(--muted)">多為自費</td>
+        </tr>
+        <tr>
+          <td>細胞治療（CAR-T）</td>
+          <td class="cost-hi">約 1,000 萬元</td>
+          <td style="font-size:13px;color:var(--muted)">自費，視適應症</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="caution">
+      <i class="fas fa-info-circle"></i>
+      <span>實際費用依照病況、醫院及健保核可與否而有所不同，僅供參考。<strong>建議提前規劃醫療保險</strong>以備不時之需。</span>
+    </div>
+  </div>
+
+</div><!-- end slideshow -->
+
+<!-- Navigation -->
+<div class="nav">
+  <button onclick="changeSlide(-1)"><i class="fas fa-chevron-left"></i></button>
+  <span class="progress" id="progText">1 / 18</span>
+  <button onclick="changeSlide(1)"><i class="fas fa-chevron-right"></i></button>
+</div>
+
+<!-- Dots -->
+<div class="dots" id="dotContainer"></div>
+
+<script>
+  const total = 17;
+  let current = 1;
+
+  // Build dots
+  const dotC = document.getElementById('dotContainer');
+  for (let i = 1; i <= total; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 1 ? ' active' : '');
+    d.onclick = () => goTo(i);
+    dotC.appendChild(d);
+  }
+
+  function goTo(n) {
+    document.getElementById('s' + current).classList.remove('active');
+    dotC.children[current - 1].classList.remove('active');
+    current = Math.max(1, Math.min(total, n));
+    document.getElementById('s' + current).classList.add('active');
+    dotC.children[current - 1].classList.add('active');
+    document.getElementById('progText').textContent = current + ' / ' + total;
+    document.getElementById('progFill').style.width = (current / total * 100) + '%';
+  }
+
+  function changeSlide(dir) { goTo(current + dir); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+
+  // Touch swipe
+  let tx = 0;
+  document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 50) changeSlide(dx < 0 ? 1 : -1);
+  });
+</script>
+</body>
+</html>
