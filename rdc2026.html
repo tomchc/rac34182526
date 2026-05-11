@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>年度光影·榮耀首映式 — 國際扶輪3481地區扶青社 2025-2026 年度報告暨敘獎典禮</title>
+<style>
+  :root {
+    --blue: #00A0DC;
+    --gold: #F7A81B;
+    --dark: #1a1a2e;
+    --darkgold: #c8860f;
+    --white: #FFFFFF;
+    --lightgray: #f5f6fa;
+    --gray: #6c757d;
+    --danger: #dc3545;
+    --success: #28a745;
+    --warn: #ffc107;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--lightgray);
+    color: #222;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: var(--dark);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 0 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .sidebar-logo {
+    background: linear-gradient(135deg, var(--blue), #0078a8);
+    padding: 1.2rem 1rem;
+    text-align: center;
+    color: white;
+  }
+  .sidebar-logo .event-badge {
+    font-size: 0.65rem;
+    background: var(--gold);
+    color: var(--dark);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+  .sidebar-logo h2 { font-size: 0.9rem; line-height: 1.4; }
+  .sidebar nav { flex: 1; padding: 1rem 0; }
+  .sidebar nav a {
+    display: block;
+    color: #adb5bd;
+    text-decoration: none;
+    padding: 0.55rem 1.2rem;
+    font-size: 0.82rem;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+  }
+  .sidebar nav a:hover, .sidebar nav a.active {
+    color: var(--gold);
+    border-left-color: var(--gold);
+    background: rgba(247,168,27,0.08);
+  }
+  .sidebar nav .section-header {
+    color: #495057;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 1.2rem 1.2rem 0.3rem;
+  }
+
+  /* MAIN */
+  .main { flex: 1; overflow-x: hidden; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1a2e 40%, #16213e 100%);
+    color: white;
+    padding: 4rem 3rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(0,160,220,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(247,168,27,0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: #adb5bd;
+    margin-bottom: 2rem;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hero-meta .meta-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-meta .meta-label {
+    font-size: 0.68rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .hero-meta .meta-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 3rem;
+    scroll-margin-top: 20px;
+  }
+  section:nth-child(even) { background: white; }
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .section-title .icon { font-size: 1.3rem; }
+  .section-subtitle {
+    color: var(--gray);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--lightgray);
+  }
+
+  /* CARDS */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+  .card {
+    background: var(--lightgray);
+    border-radius: 12px;
+    padding: 1.4rem;
+    border-top: 4px solid var(--blue);
+  }
+  .card.gold { border-top-color: var(--gold); }
+  .card.dark { border-top-color: var(--dark); background: var(--dark); color: white; }
+  .card.success { border-top-color: var(--success); }
+  .card .card-icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .card .card-label { font-size: 0.75rem; color: var(--gray); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
+  .card.dark .card-label { color: #adb5bd; }
+  .card .card-value { font-size: 1.5rem; font-weight: 900; color: var(--dark); }
+  .card.dark .card-value { color: var(--gold); }
+  .card .card-sub { font-size: 0.82rem; color: var(--gray); margin-top: 2px; }
+  .card.dark .card-sub { color: #adb5bd; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid #e9ecef; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.87rem; }
+  th {
+    background: var(--dark);
+    color: white;
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  td { padding: 0.65rem 1rem; border-bottom: 1px solid #e9ecef; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(0,160,220,0.04); }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+  .badge-blue { background: rgba(0,160,220,0.15); color: #0078a8; }
+  .badge-gold { background: rgba(247,168,27,0.2); color: #a06b00; }
+  .badge-red { background: rgba(220,53,69,0.15); color: #dc3545; }
+  .badge-green { background: rgba(40,167,69,0.15); color: #1a7a33; }
+  .badge-gray { background: #e9ecef; color: #495057; }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0.6rem; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(to bottom, var(--blue), var(--gold));
+  }
+  .timeline-item { position: relative; padding: 0 0 2rem 1.5rem; }
+  .timeline-dot {
+    position: absolute; left: -1.4rem; top: 0.25rem;
+    width: 14px; height: 14px;
+    background: var(--blue);
+    border: 3px solid white;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--blue);
+  }
+  .timeline-dot.gold { background: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+  .timeline-dot.red { background: var(--danger); box-shadow: 0 0 0 2px var(--danger); }
+  .timeline-date { font-size: 0.75rem; color: var(--gray); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 2px; }
+  .timeline-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+  .timeline-desc { font-size: 0.85rem; color: #495057; }
+
+  /* BUDGET BARS */
+  .budget-item { margin-bottom: 0.8rem; }
+  .budget-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 4px; }
+  .budget-label .amount { font-weight: 700; color: var(--dark); }
+  .budget-bar-bg { background: #e9ecef; border-radius: 20px; height: 10px; }
+  .budget-bar { height: 10px; border-radius: 20px; background: linear-gradient(90deg, var(--blue), #0078a8); }
+  .budget-bar.gold { background: linear-gradient(90deg, var(--gold), var(--darkgold)); }
+  .budget-bar.dark { background: linear-gradient(90deg, var(--dark), #2d3561); }
+
+  /* ORG CHART */
+  .org-chart { text-align: center; padding: 1rem; }
+  .org-box {
+    display: inline-block;
+    background: var(--dark);
+    color: white;
+    border-radius: 8px;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 4px;
+  }
+  .org-box.blue { background: var(--blue); }
+  .org-box.gold { background: var(--darkgold); }
+  .org-row { display: flex; justify-content: center; align-items: flex-start; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem; }
+  .org-connector { width: 2px; background: #adb5bd; height: 20px; margin: 0 auto; }
+
+  /* RISK MATRIX */
+  .risk-matrix { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; max-width: 600px; }
+  .risk-cell {
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+  }
+  .risk-extreme { background: #dc3545; color: white; }
+  .risk-high { background: #fd7e14; color: white; }
+  .risk-medium { background: #ffc107; color: #333; }
+  .risk-low { background: #28a745; color: white; }
+
+  /* COLLAPSIBLE */
+  details { border: 1px solid #e9ecef; border-radius: 10px; margin-bottom: 1rem; }
+  details summary {
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    background: var(--lightgray);
+    border-radius: 10px;
+  }
+  details[open] summary { border-radius: 10px 10px 0 0; border-bottom: 1px solid #e9ecef; }
+  details summary::after { content: '▼'; font-size: 0.7rem; color: var(--gray); }
+  details[open] summary::after { content: '▲'; }
+  details .details-body { padding: 1.2rem; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 0.4rem 0;
+    padding-left: 1.8rem;
+    position: relative;
+    font-size: 0.87rem;
+  }
+  .checklist li::before {
+    content: '☐';
+    position: absolute; left: 0;
+    color: var(--blue);
+    font-size: 1rem;
+  }
+
+  /* PROGRAM STEPPER */
+  .stepper { display: flex; gap: 0; overflow-x: auto; padding-bottom: 0.5rem; }
+  .step {
+    flex: 0 0 auto;
+    min-width: 130px;
+    padding: 1rem 0.8rem;
+    background: var(--lightgray);
+    border-right: 2px solid white;
+    position: relative;
+    text-align: center;
+  }
+  .step:last-child { border-right: none; }
+  .step.highlight { background: linear-gradient(135deg, var(--blue), #0078a8); color: white; }
+  .step.awards { background: linear-gradient(135deg, #b8860b, var(--darkgold)); color: white; }
+  .step-time { font-size: 0.75rem; font-weight: 700; opacity: 0.8; }
+  .step-title { font-size: 0.82rem; font-weight: 700; margin-top: 4px; }
+  .step-dur { font-size: 0.7rem; opacity: 0.7; margin-top: 2px; }
+
+  /* ALERT BOX */
+  .alert {
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+    font-size: 0.87rem;
+  }
+  .alert-warning { background: #fff8e1; border-color: var(--gold); }
+  .alert-danger { background: #fdf3f3; border-color: var(--danger); }
+  .alert-info { background: #e8f4fd; border-color: var(--blue); }
+  .alert-success { background: #f0fff4; border-color: var(--success); }
+  .alert strong { display: block; margin-bottom: 4px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: #adb5bd;
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.82rem;
+  }
+  footer .footer-logo { color: var(--gold); font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+
+  /* PRINT */
+  @media print {
+    .sidebar { display: none; }
+    .main { margin: 0; }
+    .hero { background: var(--dark) !important; -webkit-print-color-adjust: exact; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    section { padding: 2rem 1.2rem; }
+    .hero { padding: 2rem 1.2rem; }
+    .hero h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <div class="event-badge">🎬 ROTARACT 3481</div>
+    <h2>年度光影<br>榮耀首映式</h2>
+  </div>
+  <nav>
+    <div class="section-header">活動總覽</div>
+    <a href="#overview">年度概覽</a>
+    <a href="#concept">活動概念</a>
+    <div class="section-header">規劃內容</div>
+    <a href="#program">詳細議程</a>
+    <a href="#logistics">場地後勤</a>
+    <a href="#staff">工作人員</a>
+    <div class="section-header">執行管理</div>
+    <a href="#timeline">執行時間軸</a>
+    <a href="#budget">預算規劃</a>
+    <a href="#risk">風險管理</a>
+    <div class="section-header">文件附件</div>
+    <a href="#kpi">KPI 指標</a>
+    <a href="#checklist">Go/No-Go 清單</a>
+  </nav>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">🎬 DISTRICT 3481 ANNUAL MEETING 2025-2026</div>
+  <h1>年度<span>光影</span>·榮耀<span>首映式</span></h1>
+  <p class="subtitle">國際扶輪3481地區扶青社 2025-2026 年度報告暨敘獎典禮</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <span class="meta-label">活動日期</span>
+      <span class="meta-value">2026年6月28日（日）</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">活動時間</span>
+      <span class="meta-value">13:00 – 17:30</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">活動地點</span>
+      <span class="meta-value">Classroom 公館</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">預計人數</span>
+      <span class="meta-value">110 人</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">總預算</span>
+      <span class="meta-value">NT$90,000</span>
+    </div>
+  </div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-title"><span class="icon">🏛</span> 年度總覽</div>
+  <div class="section-subtitle">本次典禮為3481地區年度最重要的官方會議，整合年度成果回顧、各社報告與敘獎典禮於電影院主題場域中</div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">👥</div>
+      <div class="card-label">出席人數</div>
+      <div class="card-value">110</div>
+      <div class="card-sub">12個分社 + 地區顧問</div>
+    </div>
+    <div class="card gold">
+      <div class="card-icon">🏆</div>
+      <div class="card-label">敘獎典禮</div>
+      <div class="card-value">奧斯卡式</div>
+      <div class="card-sub">信封揭曉 · 舞台頒發</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <div class="card-label">場域主題</div>
+      <div class="card-value">首映式</div>
+      <div class="card-sub">Classroom 公館前電影院</div>
+    </div>
+    <div class="card dark">
+      <div class="card-icon">💰</div>
+      <div class="card-label">活動預算</div>
+      <div class="card-value">NT$90,000</div>
+      <div class="card-sub">含10%機動準備金</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🍿</div>
+      <div class="card-label">特色餐飲</div>
+      <div class="card-value">3 種</div>
+      <div class="card-sub">爆米花 · 飲料 · 餐盒</div>
+    </div>
+    <div class="card gold">
+      <div class="card-icon">🎮</div>
+      <div class="card-label">互動環節</div>
+      <div class="card-value">Kahoot ×2</div>
+      <div class="card-sub">年度知識 + 趣味電影題</div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    <strong>📍 場地特色</strong>
+    Classroom 公館為前電影院改建之活動空間，保有電影院座椅配置，可容納約110人。場地本身的電影院氣氛是本次「首映式」主題的天然背景，爆米花與飲料的供應完全契合主題。
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="section-title"><span class="icon">💡</span> 活動概念</div>
+  <div class="section-subtitle">混合型「年度光影·榮耀首映式」— 正式議程框架 × 電影首映式美學</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+    <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);color:white;border-radius:12px;padding:1.8rem;">
+      <div style="color:var(--gold);font-size:0.75rem;font-weight:700;letter-spacing:1px;margin-bottom:0.8rem;">CONCEPT</div>
+      <h3 style="font-size:1.3rem;margin-bottom:0.8rem;">年度光影·榮耀首映式</h3>
+      <p style="font-size:0.87rem;color:#adb5bd;line-height:1.7;">
+        在前電影院的空間中，以首映式為框架承載正式地區年報與敘獎典禮。
+        保持扶青地區官方會議的莊重格局，同時讓電影院場域的氣氛成為
+        今晚最自然的視覺語言。爆米花、飲料、紅毯——這些元素不是點綴，
+        而是空間本身的一部分。
+      </p>
+    </div>
+    <div style="background:var(--lightgray);border-radius:12px;padding:1.8rem;">
+      <div style="color:var(--blue);font-size:0.75rem;font-weight:700;letter-spacing:1px;margin-bottom:0.8rem;">三大設計原則</div>
+      <div style="margin-bottom:1rem;">
+        <div style="font-weight:700;margin-bottom:4px;">🎭 正式感不妥協</div>
+        <div style="font-size:0.85rem;color:var(--gray);">DG/AG出席，地區年度官方會議規格維持</div>
+      </div>
+      <div style="margin-bottom:1rem;">
+        <div style="font-weight:700;margin-bottom:4px;">🎬 場域感有意義</div>
+        <div style="font-size:0.85rem;color:var(--gray);">每個電影元素都有功能性，不是勉強套入</div>
+      </div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;">⚡ 節奏感有設計</div>
+        <div style="font-size:0.85rem;color:var(--gray);">串場影片、Kahoot、餐點節點精確計算</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 電影元素對應表 -->
+  <h4 style="margin-bottom:1rem;font-weight:700;">電影主題元素對應</h4>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>電影院元素</th>
+          <th>活動對應設計</th>
+          <th>執行方式</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>🎬 電影倒數開場</td><td>13:00 整全場倒數動畫</td><td>大銀幕播放電影院式 3-2-1 倒數</td></tr>
+        <tr><td>🟥 紅毯首映</td><td>12:30 紅毯簽到拍照區</td><td>6m 紅毯 + 主視覺背板 + 聚光燈</td></tr>
+        <tr><td>🍿 爆米花</td><td>入場即配發</td><td>個人份預包裝，座位預置或入場時領取</td></tr>
+        <tr><td>📽 幕間特輯</td><td>5 段轉場短影片</td><td>各段落間播放，統一主視覺風格</td></tr>
+        <tr><td>🏆 奧斯卡頒獎</td><td>敘獎典禮設計</td><td>信封揭曉 + 追光燈 + 管弦樂配樂</td></tr>
+        <tr><td>📺 大銀幕</td><td>各社年度報告影片</td><td>各社可提交 2 分鐘精華影片</td></tr>
+        <tr><td>🎮 觀眾互動</td><td>Kahoot ×2 輪</td><td>年度成果知識 + 電影主題趣味搶答</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section id="program">
+  <div class="section-title"><span class="icon">📋</span> 詳細議程</div>
+  <div class="section-subtitle">2026年6月28日（日）13:00–17:30 · 總時長約 4.5 小時</div>
+
+  <!-- 流程橫軸 -->
+  <div class="stepper" style="margin-bottom:2rem;">
+    <div class="step highlight">
+      <div class="step-time">12:30</div>
+      <div class="step-title">🟥 紅毯入場</div>
+      <div class="step-dur">30 min</div>
+    </div>
+    <div class="step highlight">
+      <div class="step-time">13:00</div>
+      <div class="step-title">🎬 開場典禮</div>
+      <div class="step-dur">35 min</div>
+    </div>
+    <div class="step">
+      <div class="step-time">13:35</div>
+      <div class="step-title">📊 地區年報</div>
+      <div class="step-dur">30 min</div>
+    </div>
+    <div class="step">
+      <div class="step-time">14:05</div>
+      <div class="step-title">🎮 Kahoot 1</div>
+      <div class="step-dur">10 min</div>
+    </div>
+    <div class="step gold" style="background:linear-gradient(135deg,var(--gold),var(--darkgold));color:white;">
+      <div class="step-time">14:15</div>
+      <div class="step-title">📽 各社報告</div>
+      <div class="step-dur">30 min</div>
+    </div>
+    <div class="step awards">
+      <div class="step-time">14:45</div>
+      <div class="step-title">🏆 敘獎典禮</div>
+      <div class="step-dur">60 min</div>
+    </div>
+    <div class="step">
+      <div class="step-time">15:45</div>
+      <div class="step-title">📸 大合照</div>
+      <div class="step-dur">5 min</div>
+    </div>
+    <div class="step">
+      <div class="step-time">15:50</div>
+      <div class="step-title">🎮 Kahoot 2</div>
+      <div class="step-dur">10 min</div>
+    </div>
+    <div class="step">
+      <div class="step-time">16:00</div>
+      <div class="step-title">🎤 閉幕致詞</div>
+      <div class="step-dur">15 min</div>
+    </div>
+    <div class="step highlight">
+      <div class="step-time">16:15</div>
+      <div class="step-title">✨ 散場</div>
+      <div class="step-dur">—</div>
+    </div>
+  </div>
+
+  <!-- 詳細議程表 -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>時間</th><th>議程項目</th><th>時長</th><th>形式</th><th>負責</th><th>備註</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>12:00</td><td>工作人員到場佈置</td><td>60 min</td><td>準備</td><td>全體工作人員</td><td>AV測試、紅毯鋪設、座位擺放</td></tr>
+        <tr style="background:rgba(0,160,220,0.05)"><td>12:30</td><td>🟥 紅毯簽到·首映式入場</td><td>30 min</td><td>紅毯接待</td><td>接待組</td><td>爆米花+飲料同步發放</td></tr>
+        <tr><td>13:00</td><td>🎬 開場特輯①（Cue C03）</td><td>2 min</td><td>影片播放</td><td>技術組</td><td>90秒年度精華開場片，大銀幕播放</td></tr>
+        <tr><td>13:02</td><td>主席鳴鐘開會</td><td>1 min</td><td>典禮</td><td>DRR Tom</td><td>正式會議啟動</td></tr>
+        <tr><td>13:03</td><td>扶輪歌唱</td><td>7 min</td><td>儀式</td><td>PDRR Gavin</td><td>這是咱的扶輪社、歡迎總監、台北流浪指南</td></tr>
+        <tr><td>13:10</td><td>貴賓介紹</td><td>5 min</td><td>介紹</td><td>聯誼</td><td>—</td></tr>
+        <tr style="background:rgba(0,160,220,0.05)"><td>13:15</td><td>主席致詞</td><td>5 min</td><td>致詞</td><td>DRR Tom</td><td>—</td></tr>
+        <tr><td>13:20</td><td>總監致詞</td><td>5 min</td><td>致詞</td><td>DG Sunny</td><td>—</td></tr>
+        <tr><td>13:25</td><td>地區青少年主委致詞</td><td>3 min</td><td>致詞</td><td>PP Print</td><td>—</td></tr>
+        <tr><td>13:28</td><td>地區扶青主委致詞</td><td>2 min</td><td>致詞</td><td>PP Printer</td><td>—</td></tr>
+        <tr><td>13:30</td><td>補介紹來賓</td><td>5 min</td><td>介紹</td><td>聯誼</td><td>—</td></tr>
+        <tr style="background:rgba(0,160,220,0.05)"><td>13:35</td><td>📊 地區年度報告</td><td>30 min</td><td>簡報+口頭</td><td>DRR Tom</td><td>—</td></tr>
+        <tr><td>14:05</td><td>🎮 Kahoot Round 1：年度成果知識王</td><td>10 min</td><td>互動搶答</td><td>AV+Kahoot員+MC</td><td>10題，前3名獲獎品</td></tr>
+        <tr><td>14:14</td><td>📽 幕間特輯②：各社登場倒數（Cue C05）</td><td>1 min</td><td>影片</td><td>技術組</td><td>30秒社名閃現動畫</td></tr>
+        <tr style="background:rgba(247,168,27,0.05)"><td>14:15</td><td>📽 各社年度報告（輪流）+ 🍿 餐盒發放</td><td>30 min</td><td>輪流報告+發餐</td><td>各社代表+餐飲組</td><td>餐盒同步2站發放；各社可提交2min精華影片</td></tr>
+        <tr><td>14:45</td><td>📽 幕間特輯④：敘獎典禮開幕（Cue C08）</td><td>1 min</td><td>影片</td><td>技術組</td><td>金粉動畫+典禮開幕BGM</td></tr>
+        <tr style="background:rgba(184,134,11,0.08)"><td>14:46</td><td>🏆 奧斯卡式敘獎典禮</td><td>59 min</td><td>典禮</td><td>MC+引獎員×2</td><td>信封揭曉+追光燈+管弦樂</td></tr>
+        <tr><td>15:45</td><td>📸 全體大合照</td><td>5 min</td><td>合照</td><td>攝影師</td><td>正式版×2+活潑版×1</td></tr>
+        <tr><td>15:50</td><td>🎮 Kahoot Round 2：電影主題趣味王（Cue C10）</td><td>10 min</td><td>互動搶答</td><td>AV+Kahoot員+MC</td><td>輕鬆版，10題電影知識+趣味回顧</td></tr>
+        <tr><td>16:00</td><td>📽 幕間特輯⑤：片尾感謝字幕（Cue C11）</td><td>2 min</td><td>影片</td><td>技術組</td><td>電影片尾字幕風格，感謝全體</td></tr>
+        <tr style="background:rgba(0,160,220,0.05)"><td>16:02</td><td>閉幕致詞·年度寄語</td><td>13 min</td><td>致詞</td><td>DG Sunny</td><td>對新年度展望，感謝所有人</td></tr>
+        <tr><td>16:15</td><td>✨ 活動圓滿結束·散場音樂（Cue C12）</td><td>—</td><td>—</td><td>AV員</td><td>—</td></tr>
+        <tr style="background:#f8f9fa"><td>16:30–17:00</td><td>場地清潔·器材撤除</td><td>30 min</td><td>收場</td><td>全體工作人員</td><td>目標17:00前完成場地交還</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 備案說明 -->
+  <h4 style="margin:2rem 0 1rem;font-weight:700;">備案規劃</h4>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+    <details>
+      <summary>各社報告超時處理</summary>
+      <div class="details-body">
+        <p style="font-size:0.85rem;color:#495057;line-height:1.7;">
+          4分鐘亮黃燈，6分鐘亮紅燈，6分30秒主持人介入。<br>
+          台詞：「感謝[社名]精彩的年度光影！讓我們以熱烈掌聲感謝他們！」<br>
+          累計延誤>10min：通知後續各社壓縮至4分鐘<br>
+          累計延誤>20min：啟動收斂議程（縮短中場/Kahoot）
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary>Kahoot 系統故障備案</summary>
+      <div class="details-body">
+        <p style="font-size:0.85rem;color:#495057;line-height:1.7;">
+          Level 1：等待2分鐘重試，切換Slido備用<br>
+          Level 2：改為舉手搶答（主持人口頭出題）<br>
+          Level 3：紙本問卷（預備A4問答單×120份）<br>
+          預防：活動前完整測試＋4G熱點備援×2
+        </p>
+      </div>
+    </details>
+    <details>
+      <summary>整體延誤>30分鐘</summary>
+      <div class="details-body">
+        <p style="font-size:0.85rem;color:#495057;line-height:1.7;">
+          可壓縮：中場15→8min（+7min）、幕間特輯縮短（+12min）、<br>
+          Kahoot2縮至6題（+4min）、閉幕詞壓縮（+5min）<br>
+          不可壓縮：敘獎典禮（全部獎項必須完整頒發）
+        </p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- LOGISTICS -->
+<section id="logistics">
+  <div class="section-title"><span class="icon">🏗</span> 場地後勤</div>
+  <div class="section-subtitle">Classroom 公館 · 前電影院改建 · 110人容量 · 電影院排排座椅配置</div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem;">
+    <!-- 場地配置圖 -->
+    <div style="background:var(--dark);color:white;border-radius:12px;padding:1.5rem;font-family:monospace;">
+      <div style="color:var(--gold);font-weight:700;margin-bottom:1rem;font-family:'Noto Sans TC',sans-serif;">場地平面配置示意</div>
+      <pre style="font-size:0.75rem;line-height:1.6;color:#adb5bd;">
+┌──────────────────────────────┐
+│        【 大 銀 幕 】          │
+│    投影/播放主螢幕             │
+│   ┌────────┐ ┌───────┐      │
+│   │ 展示台 │ │  講台 │      │
+│   │(獎座)  │ │(主持) │      │
+│   └────────┘ └───────┘      │
+│ ← 走道紅毯延伸至此 →          │
+│                               │
+│  排排座位 × 110 席             │
+│  [電影院固定座椅配置]          │
+│                               │
+│   前排：DG/AG + 各社主席       │
+│   後排：一般社員               │
+└─────────────┬────────────────┘
+              │ 入口
+    【 紅毯區 6m 】
+    背板簽到牆 | 聚光燈×2
+      </pre>
+    </div>
+    <!-- 時序 -->
+    <div>
+      <h4 style="margin-bottom:1rem;font-weight:700;">後勤時序</h4>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">12:00</div>
+          <div class="timeline-title">工作人員到場佈置</div>
+          <div class="timeline-desc">AV測試、紅毯鋪設、背板架設、追光燈定位</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">12:20</div>
+          <div class="timeline-title">爆米花+飲料座位預置</div>
+          <div class="timeline-desc">餐飲組逐排發放，確保13:00前完成</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot gold"></div>
+          <div class="timeline-date">12:30</div>
+          <div class="timeline-title">開放入場</div>
+          <div class="timeline-desc">紅毯接待啟動，攝影師就位</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">14:15</div>
+          <div class="timeline-title">餐盒發放（與各社報告同步）</div>
+          <div class="timeline-desc">依排次分批領取，2站同時發放（葷/素），30分鐘內完成</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot red"></div>
+          <div class="timeline-date">16:30–17:00</div>
+          <div class="timeline-title">拆場還場</div>
+          <div class="timeline-desc">垃圾清理、設備撤除、場地驗收，目標17:00完成</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 餐飲計畫 -->
+  <h4 style="margin-bottom:1rem;font-weight:700;">🍿 餐飲規劃</h4>
+  <div class="table-wrap" style="margin-bottom:1.5rem;">
+    <table>
+      <thead>
+        <tr><th>品項</th><th>數量</th><th>發放時機</th><th>發放方式</th><th>預算</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>爆米花（個人份預包裝）</td><td>130份（含備用）</td><td>入場時（12:30起）</td><td>座位預置法</td><td>NT$2,600</td></tr>
+        <tr><td>飲料（瓶裝水/罐裝）</td><td>130份（含備用）</td><td>入場時</td><td>座位預置法</td><td>NT$2,600</td></tr>
+        <tr><td>餐盒（葷食/素食）</td><td>133份（含工作人員+備用）</td><td>中場休息（15:15）</td><td>2站發放，依排次分批</td><td>NT$19,950</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="alert alert-warning">
+    <strong>⚠ 飲食過敏注意</strong>
+    報名表需設置飲食限制欄位。素食餐盒以不同顏色貼紙標示，優先於一般站別發放。急救箱須備有抗組織胺藥物。
+  </div>
+</section>
+
+<!-- STAFF -->
+<section id="staff">
+  <div class="section-title"><span class="icon">👤</span> 工作人員組織</div>
+  <div class="section-subtitle">共 12 名工作人員 · 分為 3 組 · 含備用人選機制</div>
+
+  <!-- ORG CHART -->
+  <div style="background:var(--lightgray);border-radius:12px;padding:2rem;text-align:center;margin-bottom:2rem;">
+    <div style="display:inline-block;background:var(--dark);color:white;border-radius:8px;padding:0.6rem 1.8rem;font-weight:700;font-size:0.9rem;">總召 ×1</div>
+    <div style="width:2px;height:20px;background:#adb5bd;margin:0 auto;"></div>
+    <div style="display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap;">
+      <div style="text-align:center;">
+        <div style="background:var(--blue);color:white;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;font-weight:700;">典禮組 ×1</div>
+        <div style="font-size:0.72rem;color:var(--gray);margin-top:4px;">MC×1</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="background:var(--dark);color:white;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;font-weight:700;">技術組 ×2</div>
+        <div style="font-size:0.72rem;color:var(--gray);margin-top:4px;">AV+Kahoot×1・音控×1</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="background:var(--darkgold);color:white;border-radius:8px;padding:0.5rem 1rem;font-size:0.82rem;font-weight:700;">接待&後勤組 ×8</div>
+        <div style="font-size:0.72rem;color:var(--gray);margin-top:4px;">紅毯×2・入場×2・引獎×2・餐飲×2</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 職位說明 -->
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>職位</th><th>人數</th><th>核心職責</th><th>關鍵時段</th><th>特殊需求</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>總召</strong></td><td>1</td><td>全場決策、時間管控、應變指揮</td><td>全程待機</td><td>對講機、流程總表</td></tr>
+        <tr><td><strong>活動主持人 MC</strong></td><td>1</td><td>串場、典禮主持、氣氛炒熱</td><td>13:00–16:15</td><td>主持稿、領夾麥</td></tr>
+        <tr><td><strong>AV 操作員+Kahoot 操作</strong></td><td>1</td><td>投影、影片播放、Cue List 執行、互動題目推進</td><td>全程</td><td>備用筆電、備用USB、熱點備援</td></tr>
+        <tr><td><strong>音控助理</strong></td><td>1</td><td>音量調控、麥克風管理</td><td>全程</td><td>調音台操作經驗</td></tr>
+        <tr><td><strong>紅毯接待+攝影</strong></td><td>2</td><td>紅毯拍照接待、全場攝影記錄</td><td>12:30–13:30</td><td>相機、補光燈</td></tr>
+        <tr><td><strong>入場引導+票務</strong></td><td>2</td><td>簽到確認、座位引導</td><td>12:30–13:30</td><td>名單夾、識別牌</td></tr>
+        <tr><td><strong>敘獎引導員</strong></td><td>2</td><td>受獎人上台引導、舞台動線</td><td>敘獎典禮段</td><td>得獎名單（保密）</td></tr>
+        <tr><td><strong>餐飲發放組</strong></td><td>2</td><td>爆米花飲料預置、餐盒發放、清潔</td><td>12:00–17:30</td><td>體力佳、動作俐落</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div class="section-title"><span class="icon">📅</span> 執行時間軸</div>
+  <div class="section-subtitle">從今日（2026-05-09）至活動後兩週的完整執行路線圖</div>
+
+  <div class="alert alert-danger">
+    <strong>⚡ 關鍵路徑提醒</strong>
+    以下五項延誤將直接影響活動能否如期執行：場地確認（5/17）→ 各社影片截止（6/14）→ 敘獎名單截止（6/14）→ 幕間特輯完成（6/21）→ 彩排（6/27）
+  </div>
+
+  <div class="table-wrap" style="margin-bottom:1.5rem;">
+    <table>
+      <thead>
+        <tr><th>里程碑</th><th>截止日期</th><th>負責單位</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>✅ 場地書面確認</td><td>2026-05-17</td><td>總召</td></tr>
+        <tr><td>✅ 正式邀請函發送 + 報名開放</td><td>2026-05-25</td><td>公關組</td></tr>
+        <tr><td>✅ 各社聯絡窗口名單確認</td><td>2026-06-07</td><td>行政組</td></tr>
+        <tr><td>✅ 獎項設計確認並下訂</td><td>2026-06-07</td><td>典禮組</td></tr>
+        <tr><td>⚠ 各社精華影片截止收件</td><td>2026-06-14</td><td>影音組</td></tr>
+        <tr><td>⚠ 敘獎受獎人名單截止</td><td>2026-06-14</td><td>典禮組</td></tr>
+        <tr><td>⚠ 幕間特輯影片（5支）完成</td><td>2026-06-21</td><td>影音組</td></tr>
+        <tr><td>⚠ 報名截止 + 工作人員行前會</td><td>2026-06-21</td><td>總召</td></tr>
+        <tr><td>✅ 行前通知發送</td><td>2026-06-22</td><td>公關組</td></tr>
+        <tr><td>✅ 獎項取件確認</td><td>2026-06-25</td><td>典禮組</td></tr>
+        <tr><td>🔴 全場彩排</td><td>2026-06-27</td><td>全員</td></tr>
+        <tr><td>🎬 活動日</td><td>2026-06-28</td><td>全員</td></tr>
+        <tr><td>📸 感謝函 + 精選照片發布</td><td>2026-06-29</td><td>公關組</td></tr>
+        <tr><td>🎬 精華回顧影片發布</td><td>2026-07-05</td><td>影音組</td></tr>
+        <tr><td>📄 成果報告定稿</td><td>2026-07-12</td><td>總召</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <div class="section-title"><span class="icon">💰</span> 預算規劃</div>
+  <div class="section-subtitle">總預算 NT$90,000 · 操作預算 NT$81,000 · 機動準備金 NT$9,000</div>
+
+  <div class="cards" style="margin-bottom:2rem;">
+    <div class="card dark">
+      <div class="card-label">總預算</div>
+      <div class="card-value">NT$90,000</div>
+      <div class="card-sub">全部費用上限</div>
+    </div>
+    <div class="card">
+      <div class="card-label">操作預算</div>
+      <div class="card-value">NT$81,000</div>
+      <div class="card-sub">可支配金額</div>
+    </div>
+    <div class="card gold">
+      <div class="card-label">機動準備金</div>
+      <div class="card-value">NT$9,000</div>
+      <div class="card-sub">突發支出緩衝</div>
+    </div>
+  </div>
+
+  <!-- 預算長條圖 -->
+  <h4 style="margin-bottom:1.5rem;font-weight:700;">費用分配（操作預算 NT$80,800）</h4>
+  <div style="background:var(--lightgray);border-radius:12px;padding:1.5rem;">
+    <div class="budget-item">
+      <div class="budget-label"><span>🍿 餐飲（爆米花+飲料+餐盒）</span><span class="amount">NT$25,150 · 31.1%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar" style="width:31.1%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>🏛 場地費</span><span class="amount">NT$18,000 · 22.3%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar" style="width:22.3%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>🏆 敘獎典禮（獎座+獎牌+信封）</span><span class="amount">NT$13,000 · 16.1%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar gold" style="width:16.1%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>🔧 設備租借</span><span class="amount">NT$7,400 · 9.2%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar" style="width:9.2%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>👥 工作人員費用（識別牌+點心+餐敘+獎品）</span><span class="amount">NT$7,200 · 8.9%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar dark" style="width:8.9%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>🎨 佈置材料</span><span class="amount">NT$5,300 · 6.6%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar" style="width:6.6%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>🖨 印刷文宣</span><span class="amount">NT$2,400 · 3.0%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar" style="width:3%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>📱 宣傳行銷</span><span class="amount">NT$1,600 · 2.0%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar" style="width:2%"></div></div>
+    </div>
+    <div class="budget-item">
+      <div class="budget-label"><span>🧰 雜支備用</span><span class="amount">NT$750 · 0.9%</span></div>
+      <div class="budget-bar-bg"><div class="budget-bar" style="width:0.9%"></div></div>
+    </div>
+  </div>
+
+  <div class="alert alert-info" style="margin-top:1.5rem;">
+    <strong>💡 收入來源建議</strong>
+    可考慮向出席社員酌收場次費 NT$100–200（110人 → 最高NT$22,000）或洽詢企業贊助（主要贊助NT$10,000–20,000）以補貼場地費。
+  </div>
+</section>
+
+<!-- RISK -->
+<section id="risk">
+  <div class="section-title"><span class="icon">⚠</span> 風險管理</div>
+  <div class="section-subtitle">14項風險登記 · 6項詳細應變流程 · 颱風決策樹 · 醫療應變</div>
+
+  <div class="table-wrap" style="margin-bottom:2rem;">
+    <table>
+      <thead>
+        <tr><th>#</th><th>風險事件</th><th>機率</th><th>影響</th><th>優先級</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>R01</td><td>颱風／惡劣天氣</td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-red">極高</span></td></tr>
+        <tr><td>R02</td><td>場地費超支</td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-red">高</span></td></tr>
+        <tr><td>R03</td><td>AV設備全面故障</td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-red">高</span></td></tr>
+        <tr><td>R04</td><td>重要人員（MC/技術員）缺席</td><td><span class="badge badge-green">低</span></td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-red">高</span></td></tr>
+        <tr><td>R05</td><td>DG/AG接待出錯</td><td><span class="badge badge-green">低</span></td><td><span class="badge badge-red">極高</span></td><td><span class="badge badge-red">高</span></td></tr>
+        <tr><td>R06</td><td>各社報告嚴重超時</td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-red">高</span></td></tr>
+        <tr><td>R07</td><td>餐盒外送延誤</td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-gold">中</span></td></tr>
+        <tr><td>R08</td><td>各社未按時繳交影片</td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-gold">中</span></td></tr>
+        <tr><td>R09</td><td>出席率低落</td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-gold">中</span></td></tr>
+        <tr><td>R10</td><td>Kahoot連線失敗</td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-green">低</span></td><td><span class="badge badge-gold">中</span></td></tr>
+        <tr><td>R11</td><td>食物過敏未滿足</td><td><span class="badge badge-green">低</span></td><td><span class="badge badge-red">高</span></td><td><span class="badge badge-gold">中</span></td></tr>
+        <tr><td>R12</td><td>爆米花設備引發火警</td><td><span class="badge badge-green">低</span></td><td><span class="badge badge-red">極高</span></td><td><span class="badge badge-gold">中</span></td></tr>
+        <tr><td>R13</td><td>頒獎信封洩密或開錯</td><td><span class="badge badge-green">低</span></td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-gray">低</span></td></tr>
+        <tr><td>R14</td><td>固定座位動線混亂</td><td><span class="badge badge-gold">中</span></td><td><span class="badge badge-green">低</span></td><td><span class="badge badge-gray">低</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 颱風決策節點 -->
+  <div class="alert alert-warning">
+    <strong>🌀 颱風應變關鍵時間點</strong>
+    D-7 開始每日監測氣象署 → D-1 18:00 第一決策點 → D-Day 06:00 最終確認。
+    陸上颱風警報發布 → 立即宣布取消/延期，D-1 20:00前通知全員。
+    詳見風險管理完整文件（工作手冊附件）。
+  </div>
+</section>
+
+<!-- KPI -->
+<section id="kpi">
+  <div class="section-title"><span class="icon">📊</span> 活動 KPI 指標</div>
+  <div class="section-subtitle">5項可量化目標，活動後2週內完成評估</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>指標</th><th>目標值</th><th>衡量方式</th><th>評估時機</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>✅ 年度報告完整度</td><td>12社×100%完成報告</td><td>議程紀錄</td><td>活動當天</td></tr>
+        <tr><td>🏆 敘獎典禮完成率</td><td>所有獎項全數頒發</td><td>敘獎名單核對</td><td>活動當天</td></tr>
+        <tr><td>👥 出席率</td><td>≥ 90人（≥82%）</td><td>簽到記錄</td><td>活動當天</td></tr>
+        <tr><td>🎮 Kahoot 參與率</td><td>≥ 80%出席者加入</td><td>Kahoot後台數據</td><td>活動當天</td></tr>
+        <tr><td>⭐ 活動滿意度</td><td>≥ 4.0 / 5.0</td><td>活動後問卷</td><td>活動後1週</td></tr>
+        <tr><td>⏰ 準時結束</td><td>不晚於17:45</td><td>實際散場時間</td><td>活動當天</td></tr>
+        <tr><td>📱 社群曝光</td><td>活動貼文觸及≥500人</td><td>IG/FB洞察報告</td><td>活動後1週</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="section-title"><span class="icon">✅</span> D-Day Go/No-Go 確認清單</div>
+  <div class="section-subtitle">2026年6月28日 12:00 執行 · 全部通過方可13:00開場</div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+    <div>
+      <h4 style="color:var(--blue);margin-bottom:0.8rem;">A · 天氣安全</h4>
+      <ul class="checklist">
+        <li>中央氣象署無陸上颱風警報</li>
+        <li>未來6小時無7級以上強風預報</li>
+        <li>颱風備用通知已準備就緒</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--blue);margin-bottom:0.8rem;">B · 場地</h4>
+      <ul class="checklist">
+        <li>場地已開放，管理員在場</li>
+        <li>紅地毯已鋪設完成</li>
+        <li>DG/AG座位已預留並標示</li>
+        <li>緊急出口暢通確認</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--blue);margin-bottom:0.8rem;">C · 技術設備</h4>
+      <ul class="checklist">
+        <li>投影機正常，影像清晰</li>
+        <li>所有麥克風正常（電池已換）</li>
+        <li>備用筆電連線測試成功</li>
+        <li>Kahoot連線正常</li>
+        <li>備用熱點設備電量充足</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--blue);margin-bottom:0.8rem;">D · 人員</h4>
+      <ul class="checklist">
+        <li>MC已到場並確認主持稿</li>
+        <li>15名工作人員全員到場</li>
+        <li>DG/AG接待SOP確認</li>
+        <li>急救負責人到場</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--blue);margin-bottom:0.8rem;">E · 後勤物資</h4>
+      <ul class="checklist">
+        <li>餐盒到場並點數完畢</li>
+        <li>爆米花+飲料已座位預置</li>
+        <li>獎項清點並依序排列</li>
+        <li>信封顏色編碼確認</li>
+      </ul>
+    </div>
+    <div>
+      <h4 style="color:var(--blue);margin-bottom:0.8rem;">F · 安全</h4>
+      <ul class="checklist">
+        <li>滅火器位置確認</li>
+        <li>AED位置確認</li>
+        <li>急救箱完整（含抗組織胺）</li>
+        <li>走道無雜物阻擋</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">🎬 年度光影·榮耀首映式</div>
+  <div>國際扶輪3481地區扶青社 2025-2026 年度報告暨敘獎典禮</div>
+  <div style="margin-top:0.5rem;">活動日期：2026年6月28日（日）· Classroom 公館 · 企劃書版本 v2.0 · 2026-05-09</div>
+  <div style="margin-top:0.5rem;color:#6c757d;">配合文件：工作手冊 · 宣傳素材包 · 結案報告模板</div>
+</footer>
+
+</div>
+
+<script>
+  // Smooth scroll + active nav highlight
+  document.querySelectorAll('.sidebar a').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Active link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
