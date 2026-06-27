@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>光耀時刻 首映式｜當日細流</title>
+<style>
+  :root{
+    --ink:#1a1a2e; --ink2:#23233f; --gold:#F7A81B; --blue:#00A0DC; --red:#8B0000;
+    --paper:#fbf8f1; --line:#e4ddcf; --txt:#2a2a33; --mut:#6b6b78;
+    /* person colors */
+    --c-matilda:#F7A81B; --c-ben:#00A0DC; --c-bei:#2BB673; --c-yier:#E8833A;
+    --c-gavin:#9B5DE5; --c-eve:#E0719C; --c-aug:#C0392B; --c-venue:#7a8499; --c-tom:#B8860B;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; font-family:"微軟正黑體","Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;
+    color:var(--txt); background:var(--paper); line-height:1.6; font-size:15.5px;
+  }
+  /* ---------- Header ---------- */
+  header.hero{
+    background:radial-gradient(120% 140% at 50% -20%,#2c2c52 0%,var(--ink) 55%,#11111f 100%);
+    color:#fff; padding:38px 22px 30px; text-align:center; position:relative; overflow:hidden;
+    border-bottom:4px solid var(--gold);
+  }
+  header.hero::before{ /* film sprocket strip */
+    content:""; position:absolute; top:0; left:0; right:0; height:14px;
+    background:repeating-linear-gradient(90deg,#000 0 10px,transparent 10px 26px);
+    opacity:.45;
+  }
+  .kicker{letter-spacing:.5em; color:var(--gold); font-size:12px; margin:6px 0 8px}
+  header.hero h1{margin:0; font-size:30px; font-weight:900; letter-spacing:.04em}
+  header.hero h2{margin:8px 0 0; font-size:15px; font-weight:400; color:#d8d8ec}
+  .meta{margin-top:18px; display:flex; flex-wrap:wrap; gap:8px 10px; justify-content:center}
+  .meta span{
+    background:rgba(255,255,255,.08); border:1px solid rgba(247,168,27,.4);
+    padding:5px 12px; border-radius:20px; font-size:13px;
+  }
+  .meta b{color:var(--gold)}
+  .ver{margin-top:14px; font-size:12px; color:#a6a6c0}
+  /* ---------- Nav ---------- */
+  nav.toc{
+    position:sticky; top:0; z-index:20; background:var(--ink2); border-bottom:1px solid #33334d;
+    display:flex; flex-wrap:wrap; gap:4px; justify-content:center; padding:8px;
+  }
+  nav.toc a{
+    color:#e9e9f4; text-decoration:none; font-size:13px; padding:6px 13px; border-radius:6px;
+    border:1px solid transparent;
+  }
+  nav.toc a:hover{background:var(--gold); color:var(--ink); font-weight:700}
+  /* ---------- Layout ---------- */
+  main{max-width:1080px; margin:0 auto; padding:26px 18px 60px}
+  section{margin-bottom:40px}
+  h3.sec{
+    font-size:21px; color:var(--ink); border-left:6px solid var(--gold);
+    padding:4px 0 4px 12px; margin:0 0 16px; font-weight:900;
+  }
+  h4.seg{
+    font-size:16px; color:#fff; background:linear-gradient(90deg,var(--ink),#3a3a63);
+    padding:7px 14px; border-radius:7px 7px 0 0; margin:22px 0 0; font-weight:700;
+  }
+  /* ---------- Banners ---------- */
+  .callout{border-radius:10px; padding:13px 16px; margin:10px 0; font-size:14px}
+  .callout.ok{background:#eef7ef; border:1px solid #bfe0c2}
+  .callout.info{background:#eef5fb; border:1px solid #c2dcf0}
+  .callout.warn{background:#fdf3e6; border:1px solid #f3d9a8}
+  .callout .lbl{font-weight:900; margin-right:6px}
+  .callout.ok .lbl{color:#2e7d32}
+  .callout.info .lbl{color:#1565c0}
+  .callout.warn .lbl{color:#b9770b}
+  /* ---------- Tables ---------- */
+  table{width:100%; border-collapse:collapse; margin:0 0 6px; background:#fff;
+    border:1px solid var(--line); border-radius:0 0 8px 8px; overflow:hidden}
+  thead th{background:var(--ink); color:#fff; font-size:13px; font-weight:700; text-align:left;
+    padding:9px 11px; letter-spacing:.02em}
+  tbody td{padding:9px 11px; border-top:1px solid var(--line); font-size:14px; vertical-align:top}
+  tbody tr:nth-child(even){background:#faf7ef}
+  td.time{white-space:nowrap; font-weight:700; color:var(--ink); font-variant-numeric:tabular-nums;
+    font-family:"Consolas",monospace; font-size:13.5px}
+  .cue{display:inline-block; background:var(--red); color:#fff; font-weight:700; font-size:12px;
+    padding:1px 7px; border-radius:4px; font-family:Consolas,monospace}
+  .meal{color:#c2410c; font-weight:700}
+  /* ---------- Person badges ---------- */
+  .p{display:inline-block; color:#fff; font-weight:700; font-size:12.5px; padding:1px 8px;
+    border-radius:5px; white-space:nowrap; line-height:1.5}
+  .p.matilda{background:var(--c-matilda); color:#3a2c00}
+  .p.ben{background:var(--c-ben)}
+  .p.bei{background:var(--c-bei)}
+  .p.yier{background:var(--c-yier)}
+  .p.gavin{background:var(--c-gavin)}
+  .p.eve{background:var(--c-eve)}
+  .p.aug{background:var(--c-aug)}
+  .p.venue{background:var(--c-venue)}
+  .p.tom{background:#fff;color:var(--c-tom);border:1.5px solid var(--c-tom)}
+  .legend{display:flex; flex-wrap:wrap; gap:7px; margin:6px 0 18px}
+  /* ---------- Role cards ---------- */
+  .cards{display:grid; grid-template-columns:repeat(auto-fill,minmax(310px,1fr)); gap:15px}
+  .card{background:#fff; border:1px solid var(--line); border-radius:11px; overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .card .top{padding:11px 14px; color:#fff; font-weight:900; font-size:16px; display:flex;
+    align-items:center; gap:8px}
+  .card ul{margin:0; padding:12px 16px 14px 30px}
+  .card li{margin-bottom:7px; font-size:13.6px}
+  .card li.flip{list-style:none; margin-left:-14px; background:#fdf3e6; border:1px solid #f3d9a8;
+    border-radius:7px; padding:8px 10px}
+  .top.matilda{background:var(--c-matilda); color:#3a2c00}
+  .top.ben{background:var(--c-ben)} .top.bei{background:var(--c-bei)}
+  .top.yier{background:var(--c-yier)} .top.gavin{background:var(--c-gavin)}
+  .top.eve{background:var(--c-eve)} .top.aug{background:var(--c-aug)}
+  /* ---------- Handoff ---------- */
+  table.handoff td:first-child{font-weight:900; text-align:center; color:var(--ink)}
+  .arrow{color:var(--red); font-weight:900}
+  /* ---------- footer ---------- */
+  footer{text-align:center; color:var(--mut); font-size:12.5px; padding:24px; border-top:1px solid var(--line)}
+  .note{font-size:13px; color:var(--mut); margin:8px 0 0}
+  @media print{
+    nav.toc{display:none} header.hero{background:var(--ink)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{font-size:12px} .cards{grid-template-columns:repeat(2,1fr)}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="kicker">★ RUN OF SHOW ★</div>
+  <h1>光耀時刻 首映式｜當日細流</h1>
+  <h2>國際扶輪 3481 地區扶青社　2025-2026 年度報告暨敘獎典禮</h2>
+  <div class="meta">
+    <span>📅 <b>2026/06/28（日）</b> 13:00–16:50</span>
+    <span>⏰ 工作人員集合 <b>12:00</b></span>
+    <span>📍 Classroom 公館（110人）</span>
+  </div>
+  <div class="ver">文件版本 v1.3 ｜ 依主持人腳本 v2.3 編製 ｜ 2026-06-26</div>
+</header>
+
+<nav class="toc">
+  <a href="#s1">§1 任務分配</a>
+  <a href="#s2">§2 主時程細流</a>
+  <a href="#s3">§3 崗位卡</a>
+  <a href="#s4">§4 Cue List</a>
+  <a href="#s5">§5 身兼交接</a>
+</nav>
+
+<main>
+
+  <div class="callout ok"><span class="lbl">✅ 已確認並排定</span>
+    Matilda（主持人）＝焦點領域主委、Ben（AV）＝公式訪問主委、Gavin（餐盒）＝服務計畫主委。交接：<b>代理主持＝Eve</b>（涵蓋 Augustine 與 Matilda 時段）｜<b>代守 AV＝場地工作人員</b>｜Gavin 時段不衝突，無需備援｜新增 <b>遞獎人員＝Augustine</b>。</div>
+  <div class="callout ok"><span class="lbl">✅ 人力編組（已定）</span>
+    入場引導/票務由 <b>Bei＋Yier 兼任</b>；<b>不設專責敘獎引導員</b>（得獎代表自行上／下台）；攝影另有<b>專責攝影師</b>；<b>音控由 Ben 兼</b>、<b>不另設總召</b>（DRR Tom 統籌）；<b>場地工作人員</b>全程於 AV 控制室協助 Ben。</div>
+  <div class="callout info"><span class="lbl">ℹ️ 提醒</span>
+    場地工作人員為場地方安排、姓名不詳，活動前由 Ben 當面交底即可。編組已無待補項。</div>
+
+  <!-- 人物圖例 -->
+  <div class="legend">
+    <span class="p matilda">Matilda 主持</span>
+    <span class="p ben">Ben AV／音控</span>
+    <span class="p bei">Bei 接待／入場</span>
+    <span class="p yier">Yier 爆米花／入場</span>
+    <span class="p gavin">Gavin 餐盒</span>
+    <span class="p eve">Eve 代理主持</span>
+    <span class="p aug">Augustine 遞獎</span>
+    <span class="p venue">場地工作人員</span>
+    <span class="p tom">DRR Tom 主席</span>
+  </div>
+
+  <!-- ===================== §1 ===================== -->
+  <section id="s1">
+    <h3 class="sec">§1　當日任務分配總表</h3>
+    <table>
+      <thead><tr><th>崗位</th><th>負責人</th><th>主要時段</th><th>核心任務</th></tr></thead>
+      <tbody>
+        <tr><td>總召集人</td><td>不另設（<span class="p tom">DRR Tom</span> 統籌）</td><td class="time">全程</td><td>全場決策、節奏監控、各組對講協調</td></tr>
+        <tr><td>主持人 MC</td><td><span class="p matilda">Matilda</span></td><td class="time">13:30–16:50</td><td>串聯全場、宣讀頒獎詞（依主持人稿.docx）｜<b>#13-14 上台時交代理主持</b></td></tr>
+        <tr><td>簡報控制／AV／音控</td><td><span class="p ben">Ben</span></td><td class="time">12:00–16:50</td><td>投影、各社換頁、得獎字卡切換、Kahoot、調音台、麥克風、升場樂、Cue List｜<b>#3-4 上台時交代守 AV</b></td></tr>
+        <tr><td>接待（紅毯／門口）</td><td><span class="p bei">Bei</span></td><td class="time">12:30–13:30</td><td>迎賓、引導打卡背板拍照、指引簽到動線</td></tr>
+        <tr><td>爆米花櫃台</td><td><span class="p yier">Yier</span></td><td class="time">12:20–13:30</td><td>爆米花＋飲料預置與發放</td></tr>
+        <tr><td>餐盒發放</td><td><span class="p gavin">Gavin</span></td><td class="time">15:00–15:15</td><td>Kahoot 開始時沿排發餐盒（葷／素分流）｜亦為服務計畫主委 #15-16 上台，<b>時段不衝突</b></td></tr>
+        <tr><td>代理主持</td><td><span class="p eve">Eve</span></td><td class="time">Augustine＋Matilda 時段</td><td>#5-6 與 #13-14 上台時，接手宣讀該段感謝詞／獎項</td></tr>
+        <tr><td>AV 控制室協助</td><td><span class="p venue">場地工作人員</span>（姓名不詳）</td><td class="time">全程</td><td>全程協助 Ben；<b>Ben #3-4 上台時接手字卡切換</b>（事前交底 C09 Cue 順序）</td></tr>
+        <tr><td>遞獎人員</td><td><span class="p aug">Augustine</span></td><td class="time">15:16–16:15</td><td>敘獎時於頒獎人側遞交感謝狀／獎座；<b>#5-6 上台時遞獎改由場地工作人員（或 DRR Tom 自取）</b></td></tr>
+        <tr><td>入場引導＋票務</td><td><span class="p bei">Bei</span>＋<span class="p yier">Yier</span>（兼）</td><td class="time">12:30–13:30</td><td>簽到、發名牌、引導就座、13:20 回報人數</td></tr>
+        <tr><td>攝影師</td><td>攝影師（專責）</td><td class="time">全程</td><td>紅毯、致詞、得獎瞬間、兩次大合照</td></tr>
+      </tbody>
+    </table>
+    <div class="callout info"><span class="lbl">＊</span>敘獎不設專責引導員：得獎代表依 MC 唱名自行上／下台，遞獎人員 Augustine 於台側遞交獎座。<b>編組已完整。</b></div>
+  </section>
+
+  <!-- ===================== §2 ===================== -->
+  <section id="s2">
+    <h3 class="sec">§2　主時程細流（12:00 → 18:00）</h3>
+    <p class="note">欄位：<span class="p matilda">MC</span>＝Matilda 主持　<span class="p ben">AV</span>＝Ben 簡報／播放／音控　接待/後勤＝Bei·Yier·Gavin·Augustine·攝影師　<span class="cue">Cue</span>＝AV 觸發點</p>
+
+    <h4 class="seg">▍佈置與報到　12:00–13:00</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>負責／動作</th></tr></thead><tbody>
+      <tr><td class="time">12:00</td><td>全員報到、點名、發對講機</td><td>全員就崗</td></tr>
+      <tr><td class="time">12:00–12:20</td><td>AV 開機測試（投影／音響／麥克風×4／備用筆電／HDMI）</td><td><span class="p ben">Ben</span>＋<span class="p venue">場地工作人員</span></td></tr>
+      <tr><td class="time">12:00–12:20</td><td>紅毯鋪設、打卡背板架設、追光定位</td><td>佈置組＋<span class="p bei">Bei</span></td></tr>
+      <tr><td class="time">12:00–12:20</td><td>簽到桌設置、名牌排列、簽到單就位（59人）</td><td><span class="p bei">Bei</span>＋<span class="p yier">Yier</span></td></tr>
+      <tr><td class="time">12:00–12:30</td><td>餐盒暫存區設置、葷／素點數、特殊餐標記</td><td><span class="p gavin">Gavin</span>＋餐務</td></tr>
+      <tr><td class="time">12:20–12:50</td><td>爆米花＋飲料逐排（或櫃台）預置完成</td><td><span class="p yier">Yier</span></td></tr>
+      <tr><td class="time">12:50</td><td><span class="cue">C01</span> 候場海報輪播＋BGM 啟動</td><td><span class="p ben">Ben</span>（自動循環）</td></tr>
+      <tr><td class="time">12:55</td><td>MC 最終走位、麥克風測試、腳本定位</td><td><span class="p matilda">Matilda</span></td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍段落零　報到聯誼　13:00–13:30</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>負責／動作</th></tr></thead><tbody>
+      <tr><td class="time">12:30 起</td><td>開放入場，紅毯接待啟動</td><td><span class="p bei">Bei</span>：迎賓→背板拍照→指引簽到｜攝影師：紅毯記錄</td></tr>
+      <tr><td class="time">13:00–13:30</td><td>賓客簽到、交流聯誼，C01 持續</td><td><span class="p yier">Yier</span>：入場者領爆米花＋飲料｜入場組：簽到發名牌</td></tr>
+      <tr><td class="time">13:20</td><td>統計到場人數回報</td><td><span class="p bei">Bei</span>＋<span class="p yier">Yier</span></td></tr>
+      <tr><td class="time">全程</td><td>MC 後台候場，不上台</td><td><span class="p matilda">Matilda</span></td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍段落一　開幕典禮　13:30–13:40</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>MC（Matilda）</th><th>AV（Ben）／其他</th></tr></thead><tbody>
+      <tr><td class="time">13:30–13:32</td><td>開場特輯①</td><td>側翼候場，影片畢上台開場白</td><td><span class="cue">C03</span> 開場特輯①（90秒）</td></tr>
+      <tr><td class="time">13:32–13:33</td><td>主席鳴鐘開會</td><td>引言請 DRR Tom 鳴鐘</td><td><span class="p tom">DRR Tom</span> 鳴鐘</td></tr>
+      <tr><td class="time">13:33–13:40</td><td>扶輪歌唱（3首）</td><td>引言</td><td><b>PDRR Gavin 帶唱</b>《這是咱的扶輪社》《歡迎總監》《台北流浪指南》｜AV 備歌詞字幕</td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍段落二　貴賓介紹與致詞　13:40–14:04</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>MC／動作</th></tr></thead><tbody>
+      <tr><td class="time">13:40–13:43</td><td>貴賓介紹</td><td>MC 串場，聯誼組協助</td></tr>
+      <tr><td class="time">13:43–13:48</td><td>主席致詞</td><td><span class="p tom">DRR Tom</span>（約5分）</td></tr>
+      <tr><td class="time">13:48–13:54</td><td>總監致詞（先唱《歡迎總監歌》再致詞）</td><td>DG Sunny｜音控配歌（Ben）</td></tr>
+      <tr><td class="time">13:54–13:58</td><td>地區扶青主委致詞</td><td>PP Printer</td></tr>
+      <tr><td class="time">13:58–14:00</td><td>補介紹貴賓</td><td>MC＋聯誼組</td></tr>
+      <tr><td class="time">14:00–14:04</td><td><b>第一次大合照</b>（貴賓＋全體）</td><td>MC 引導入鏡｜<b>攝影師</b>主拍｜入場組協助站位</td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍段落三　地區年度報告　14:04–14:34</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>MC／AV</th></tr></thead><tbody>
+      <tr><td class="time">14:04–14:34</td><td>地區年度報告（DRR Tom，約30分）</td><td>MC 引言→交場｜<span class="p ben">Ben</span>：簡報換頁協助</td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍段落四　各社年度報告 10 社　14:34–15:00</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>MC／AV</th></tr></thead><tbody>
+      <tr><td class="time">14:34–14:35</td><td>幕間特輯②</td><td><span class="cue">C05</span> 各社登場倒數</td></tr>
+      <tr><td class="time">14:35–15:00</td><td>各社影片／簡報（隨機序）</td><td>MC 逐社串介｜<span class="cue">C06</span> <span class="p ben">Ben</span> 依序切換</td></tr>
+    </tbody></table>
+    <div class="callout info"><span class="lbl">各社上台順序（已隨機抽定）</span>
+      ①錫口 ②永福 ③想像實踐 ④西門 ⑤台北 ⑥雁行 ⑦東吳承平 ⑧晨新 ⑨西區 ⑩方舟（每社約2.5分）</div>
+
+    <h4 class="seg">▍段落五　Kahoot「扶青嚇嚇叫」＋ 餐盒發放　15:00–15:15</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>負責／動作</th></tr></thead><tbody>
+      <tr><td class="time">15:00</td><td>Kahoot 畫面啟動（單回合10題）</td><td><span class="cue">C10</span> <span class="p ben">Ben</span> 起 Kahoot Host；MC 活絡氣氛、報排行榜</td></tr>
+      <tr><td class="time">15:00–15:15</td><td><span class="meal">🍱 餐盒發放</span>（同步進行）</td><td><span class="p gavin">Gavin</span>：Kahoot 開始即沿排發放，葷／素分流，前排→後排分批；留意動線勿遮投影</td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍段落六　敘獎典禮 20 項　15:15–16:15</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>MC／AV／遞獎</th></tr></thead><tbody>
+      <tr><td class="time">15:15</td><td>幕間特輯④ 敘獎開幕</td><td><span class="cue">C08</span></td></tr>
+      <tr><td class="time">15:16</td><td>開幕宣言＋字卡待命</td><td>MC 開幕宣言｜<span class="cue">C09</span> <span class="p ben">Ben</span> 切感謝字卡、<span class="p aug">Augustine</span> 就位</td></tr>
+      <tr><td class="time">15:16–16:15</td><td>20 項頒獎（主委感謝 ↔ 社獎交錯）</td><td>MC 宣讀；<span class="p ben">Ben</span> 逐項切換字卡；得獎代表依唱名自行上／下台；<span class="p aug">Augustine</span> 台側遞交感謝狀／獎座；音控升場樂</td></tr>
+    </tbody></table>
+    <div class="callout info"><span class="lbl">頒獎人機制</span>
+      每位上台受感謝之主委「留步」協助頒緊接的 1 個社獎；連續社獎或主委缺席則 DRR Tom 頒。壓軸 #19 傑出扶青社獎、#20 地區扶青主委感謝由 <b>DG Sunny＋DRR Tom</b> 共同頒發。完整 20 項見主持人腳本 §段落六。</div>
+    <div class="callout warn"><span class="lbl">🔁 三處身兼交接（已排定）</span>
+      <ul style="margin:8px 0 0;padding-left:20px">
+        <li><b>#3 公式訪問主委感謝＋#4 社員發展獎</b>（約 15:24–15:30）：<span class="p ben">Ben</span> 上台受獎/頒獎，<b>AV 桌由 <span class="p venue">場地工作人員</span> 代守</b>字卡切換。</li>
+        <li><b>#5 領導人研習會主委感謝＋#6 未來領導人獎</b>（約 15:31–15:37）：<span class="p aug">Augustine</span> 上台受獎/頒獎，<b>遞獎改由場地工作人員（或 DRR Tom 自取）</b>；MC 由 <span class="p eve">Eve</span> 代理。</li>
+        <li><b>#13 焦點領域主委感謝＋#14 扶輪基金獎</b>（約 15:52–15:58）：<span class="p matilda">Matilda</span> 上台受獎/頒獎，<b>MC 由 <span class="p eve">Eve</span> 代理主持</b>宣讀。</li>
+      </ul></div>
+
+    <h4 class="seg">▍段落七　未來領導人＋糾察報告　16:15–16:25</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>MC／動作</th></tr></thead><tbody>
+      <tr><td class="time">16:15–16:20</td><td>介紹未來領導人</td><td>DRR Tom 介紹 DRRE Sammuel 吳淳孝、DRRN Eve 呂佳盈</td></tr>
+      <tr><td class="time">16:20–16:25</td><td>糾察報告（本日 IOU）</td><td>MC 即興宣讀樂捐事項</td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍段落八　閉幕　16:25–16:50</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>MC／AV</th></tr></thead><tbody>
+      <tr><td class="time">16:25–16:30</td><td>片尾感謝字幕</td><td><span class="cue">C11</span></td></tr>
+      <tr><td class="time">16:30–16:43</td><td>MC 閉幕致詞</td><td><span class="p matilda">Matilda</span></td></tr>
+      <tr><td class="time">16:43–16:45</td><td>主席鳴鐘閉會</td><td><span class="p tom">DRR Tom</span> 鳴鐘</td></tr>
+      <tr><td class="time">16:45–16:50</td><td><b>第二次大合照</b>（全體）＋散場</td><td>MC 引導｜<b>攝影師</b>主拍｜<span class="cue">C12</span> 散場音樂</td></tr>
+    </tbody></table>
+
+    <h4 class="seg">▍拆場與結束　16:50–18:00</h4>
+    <table><thead><tr><th>時間</th><th>環節</th><th>負責</th></tr></thead><tbody>
+      <tr><td class="time">16:50–17:00</td><td>送行賓客、遺失物確認</td><td><span class="p bei">Bei</span>＋入場組</td></tr>
+      <tr><td class="time">17:00–17:30</td><td>拆場：垃圾、餐盒回收、設備撤除、場地復原</td><td><span class="p gavin">Gavin</span>·<span class="p yier">Yier</span> 餐飲區清潔｜<span class="p ben">Ben</span> 收 AV｜全員分區</td></tr>
+      <tr><td class="time">17:30</td><td>場地最終確認、交還鑰匙</td><td>DRR Tom／場地</td></tr>
+      <tr><td class="time">18:00</td><td>解散／慶功聚餐集合</td><td>全員</td></tr>
+    </tbody></table>
+  </section>
+
+  <!-- ===================== §3 ===================== -->
+  <section id="s3">
+    <h3 class="sec">§3　崗位卡（隨身速查）</h3>
+    <div class="cards">
+
+      <div class="card"><div class="top matilda">🎬 Matilda — 主持人 MC</div><ul>
+        <li><b>報到 12:00</b>；12:55 完成走位＋麥克風測試＋腳本（主持人稿.docx 已塑封）定位。</li>
+        <li>全程持手持麥；與 Ben 暗語：豎拇指＝準備，點頭＝可播放。</li>
+        <li>關鍵 Cue：C03(13:30)→C05(14:34)→C08(15:15)→C11(16:25) 皆 MC 示意後播。</li>
+        <li>敘獎段不可催場；致詞與頒獎留足時間。</li>
+        <li class="flip">🔁 <b>你身兼焦點領域主委</b>：#13 受感謝、#14 頒扶輪基金獎（約 15:52–15:58）須上台。<b>該段麥克風交 Eve 代理主持</b>，你專心受獎/頒獎，畢即接回。</li>
+      </ul></div>
+
+      <div class="card"><div class="top ben">🖥️ Ben — 簡報／AV／音控</div><ul>
+        <li><b>報到 12:00</b>；12:00–12:20 完成投影、音響、麥克風×4、調音台、備用筆電、HDMI 測試。</li>
+        <li><b>AV＋音控一手包</b>：守 Cue List C01→C03→C05→C06(各社10支)→C10→C08→C09(20張字卡)→C11→C12；同掌調音台、麥克風音量、升場樂淡入淡出。</li>
+        <li>各社換頁、敘獎得獎字卡逐項切換（依 20 項順序）、Kahoot Host。</li>
+        <li><b>全程有場地工作人員於控制室協助</b>；活動前務必交底 C09 字卡 20 項順序與各 Cue。</li>
+        <li>備品：備用筆電（完整檔）、USB×2、轉接頭組、4G熱點。</li>
+        <li class="flip">🔁 <b>你身兼公式訪問主委</b>：#3 受感謝、#4 頒社員發展獎（約 15:24–15:30）須上台。<b>該段由場地工作人員代守控制室</b>切換字卡與音樂，回座後接回。</li>
+      </ul></div>
+
+      <div class="card"><div class="top bei">🎟️ Bei — 接待＋入場引導/票務</div><ul>
+        <li><b>報到 12:00</b>；協助 12:00–12:20 紅毯／打卡背板架設、簽到桌就位。</li>
+        <li>12:30 起迎賓：踏紅毯→打卡背板拍照→簽到、發名牌→引導就座（前排留 DG/AG＋各社主席）。</li>
+        <li>與 Yier 分工票務：13:20 前統計到場人數回報。</li>
+        <li>DG Sunny 總監、PP Printer 等貴賓到場即時通報攝影師。</li>
+        <li>16:50 送行賓客、協助遺失物確認。</li>
+      </ul></div>
+
+      <div class="card"><div class="top yier">🍿 Yier — 爆米花＋入場引導/票務</div><ul>
+        <li><b>報到 12:00</b>；12:20–12:50 完成爆米花＋飲料預置（逐排或櫃台）。</li>
+        <li>12:30–13:30 入場者領取爆米花＋飲料；留意素食／兒童飲品需求。</li>
+        <li>與 Bei 分工票務：協助簽到、發名牌、引導就座；13:20 前協同清點人數。</li>
+        <li>補貨、保持櫃台整潔；與 Gavin 共用餐飲暫存區。</li>
+      </ul></div>
+
+      <div class="card"><div class="top gavin">🍱 Gavin — 餐盒發放</div><ul>
+        <li><b>報到 12:00</b>；12:00–12:30 餐盒點數（葷／素分流、特殊餐標記）。</li>
+        <li><b>15:00 Kahoot 一開始即沿排發餐盒</b>，前排→後排分批，動線勿遮投影。</li>
+        <li>站A葷食／站B素食‧特殊需求；留意過敏標記。</li>
+        <li>17:00 後帶餐飲區清潔、餐盒回收。</li>
+        <li class="flip">🔁 <b>你身兼服務計畫主委</b>：#15 受感謝、#16 頒社秘行政獎（約 15:50 後）須上台。發餐 15:15 已結束，<b>時段不衝突</b>——15:15 後回座待命受獎。</li>
+      </ul></div>
+
+      <div class="card"><div class="top eve">🎤 Eve — 代理主持（敘獎段）</div><ul>
+        <li>平時為來賓席（DRRN Eve，#1 受感謝、#2 頒社區共融獎、亦為扶青代表提名人）。</li>
+        <li><b>代理主持</b>：在 <b>Augustine 時段（#5-6，約 15:31–15:37）</b> 與 <b>Matilda 時段（#13-14，約 15:52–15:58）</b>，接手主持麥克風宣讀該段感謝詞與獎項，讓當事人專心受獎／頒獎。</li>
+        <li>提前與 Matilda 對腳本交接點；備一份標記 #5-6、#13-14 的敘獎段腳本。</li>
+      </ul></div>
+
+      <div class="card"><div class="top aug">🏅 Augustine — 遞獎人員（敘獎段）</div><ul>
+        <li>敘獎全程（15:16–16:15）於頒獎人側待命，逐項遞交感謝狀／獎座。</li>
+        <li>與字卡（Ben）同步：MC 唱名→得獎者自行上台→備妥該項獎座→頒獎人接手頒發。</li>
+        <li class="flip">🔁 <b>你身兼領導人研習會主委</b>：#5 受感謝、#6 頒未來領導人獎（約 15:31–15:37）須上台，<b>該段遞獎改由場地工作人員（或 DRR Tom 自取）</b>；同段主持由 Eve 代理。</li>
+      </ul></div>
+
+    </div>
+  </section>
+
+  <!-- ===================== §4 ===================== -->
+  <section id="s4">
+    <h3 class="sec">§4　全日 Cue List（AV／Ben 專用）</h3>
+    <table><thead><tr><th>Cue</th><th>時間</th><th>內容</th><th>觸發</th></tr></thead><tbody>
+      <tr><td><span class="cue">C01</span></td><td class="time">12:50</td><td>候場海報輪播＋BGM</td><td>自動</td></tr>
+      <tr><td><span class="cue">C03</span></td><td class="time">13:30</td><td>開場特輯①（90秒）</td><td>MC 示意</td></tr>
+      <tr><td><span class="cue">C05</span></td><td class="time">14:34</td><td>幕間特輯②（各社倒數）</td><td>MC 示意</td></tr>
+      <tr><td><span class="cue">C06</span></td><td class="time">14:35 起</td><td>各社影片／簡報（錫口→永福→想像實踐→西門→台北→雁行→東吳承平→晨新→西區→方舟）</td><td>依序切換</td></tr>
+      <tr><td><span class="cue">C10</span></td><td class="time">15:00</td><td>Kahoot「扶青嚇嚇叫」（10題）</td><td>Kahoot 員（Ben）示意</td></tr>
+      <tr><td><span class="cue">C08</span></td><td class="time">15:15</td><td>幕間特輯④（敘獎開幕）</td><td>MC 示意</td></tr>
+      <tr><td><span class="cue">C09</span></td><td class="time">15:16</td><td>敘獎背景循環＋20張得獎字卡</td><td>遞獎人員到位後</td></tr>
+      <tr><td><span class="cue">C11</span></td><td class="time">16:25</td><td>幕間特輯⑤（片尾字幕）</td><td>MC 示意</td></tr>
+      <tr><td><span class="cue">C12</span></td><td class="time">16:50</td><td>散場音樂</td><td>鳴鐘＋第二次合照後</td></tr>
+    </tbody></table>
+  </section>
+
+  <!-- ===================== §5 ===================== -->
+  <section id="s5">
+    <h3 class="sec">§5　身兼崗位交接安排（已確認定稿）</h3>
+    <p class="note">主持人腳本敘獎名單中，3 位上台人員同時身兼當日工作崗位，交接已排定如下：</p>
+    <table class="handoff"><thead><tr><th>#</th><th>身兼者</th><th>工作崗位</th><th>上台時點</th><th>交接安排</th></tr></thead><tbody>
+      <tr><td>1</td><td><span class="p matilda">Matilda</span></td><td>主持人 MC</td><td class="time">#13-14（~15:52–15:58）</td><td>MC 麥克風 <span class="arrow">→</span> <span class="p eve">Eve 代理主持</span></td></tr>
+      <tr><td>2</td><td><span class="p ben">Ben</span></td><td>簡報控制 AV／音控</td><td class="time">#3-4（~15:24–15:30）</td><td>AV 字卡＋音樂 <span class="arrow">→</span> <span class="p venue">場地工作人員代守</span>（全程在控制室）</td></tr>
+      <tr><td>3</td><td><span class="p aug">Augustine</span></td><td>遞獎人員</td><td class="time">#5-6（~15:31–15:37）</td><td>遞獎 <span class="arrow">→</span> <span class="p venue">場地工作人員</span>（或 DRR Tom 自取）；MC <span class="arrow">→</span> <span class="p eve">Eve</span></td></tr>
+      <tr><td>4</td><td><span class="p gavin">Gavin</span></td><td>餐盒發放</td><td class="time">#15-16（~15:50 後）</td><td>發餐 15:15 已結束，<b>不衝突、無需備援</b></td></tr>
+    </tbody></table>
+    <div class="callout warn"><span class="lbl">行前提醒</span>
+      <b>① Eve</b> 事前拿到標記 #5-6／#13-14 的敘獎腳本並與 Matilda 對交接點；
+      <b>② 場地工作人員</b>全程在控制室協助 Ben，活動前由 Ben 當面交底 C09 字卡 20 項順序與各 Cue；
+      <b>③ Augustine</b> #5-6 上台時遞獎由場地工作人員協助或 DRR Tom 自取（敘獎不設專責引導員，得獎代表自行上／下台）。</div>
+    <div class="callout ok"><span class="lbl">✅</span>人力編組已完整（音控＝Ben、不另設總召、場地工作人員由場地方安排）。</div>
+  </section>
+
+</main>
+
+<footer>
+  本細流 v1.3 ｜ 2026-06-26 ｜ 依主持人腳本 v2.3 編製，身兼交接＋精簡人力編組已確認排定<br>
+  國際扶輪 3481 地區扶青社　光耀時刻 首映式　2026/06/28
+</footer>
+</body>
+</html>
